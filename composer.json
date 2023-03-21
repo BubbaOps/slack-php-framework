@@ -51,7 +51,7 @@
         "test-coverage": "XDEBUG_MODE=coverage phpunit --bootstrap=vendor/autoload.php --coverage-html=build/coverage --whitelist=src tests",
         "test-debug": "XDEBUG_MODE=debug phpunit --bootstrap=vendor/autoload.php --no-coverage --debug tests",
         "test-all":  [
-            "@style-lint",
+            "@format",
             "@stan",
             "@test-coverage"
         ]
