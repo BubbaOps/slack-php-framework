@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework;
+namespace BubbaOps\Framework;
 
 use function getenv;
 use function strtoupper;
@@ -136,7 +136,7 @@ final class Env
      */
     public static function getMaxClockSkew(): int
     {
-        $value = self::vars('SLACKPHP')->get(self::MAX_CLOCK_SKEW);
+        $value = self::vars('BubbaOps')->get(self::MAX_CLOCK_SKEW);
 
         return $value ? (int) $value : self::FIVE_MINUTES;
     }
@@ -146,6 +146,6 @@ final class Env
      */
     public static function getSkipAuth(): bool
     {
-        return (bool) self::vars('SLACKPHP')->get(self::SKIP_AUTH);
+        return (bool) self::vars('BubbaOps')->get(self::SKIP_AUTH);
     }
 }

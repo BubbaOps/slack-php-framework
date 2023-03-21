@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Deferral;
+namespace BubbaOps\Framework\Deferral;
 
-use SlackPhp\Framework\Context;
-use SlackPhp\Framework\Deferrer;
-use SlackPhp\Framework\Listener;
+use BubbaOps\Framework\Context;
+use BubbaOps\Framework\Deferrer;
+use BubbaOps\Framework\Listener;
 
 /**
  * A synchronous implementation of Deferrer, that does the additional processing prior to the "ack" HTTP response.

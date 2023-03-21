@@ -1,10 +1,10 @@
 <?php
 
-namespace SlackPhp\Framework\Tests\Integration;
+namespace BubbaOps\Framework\Tests\Integration;
 
-use SlackPhp\BlockKit\Surfaces\Modal;
-use SlackPhp\Framework\App;
-use SlackPhp\Framework\Context;
+use BubbaOps\BlockKit\Surfaces\Modal;
+use BubbaOps\Framework\App;
+use BubbaOps\Framework\Context;
 
 class ShortcutTest extends IntegTestCase
 {

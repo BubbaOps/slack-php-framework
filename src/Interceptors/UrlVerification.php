@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Interceptors;
+namespace BubbaOps\Framework\Interceptors;
 
-use SlackPhp\Framework\Context;
-use SlackPhp\Framework\Contexts\PayloadType;
-use SlackPhp\Framework\Interceptor;
-use SlackPhp\Framework\Listener;
+use BubbaOps\Framework\Context;
+use BubbaOps\Framework\Contexts\PayloadType;
+use BubbaOps\Framework\Interceptor;
+use BubbaOps\Framework\Listener;
 
 class UrlVerification implements Interceptor
 {

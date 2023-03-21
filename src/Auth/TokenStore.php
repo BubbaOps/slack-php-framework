@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Auth;
+namespace BubbaOps\Framework\Auth;
 
-use SlackPhp\Framework\Exception;
+use BubbaOps\Framework\Exception;
 
 /**
  * @TODO I have not considered the user token case yet. This may need changes later.

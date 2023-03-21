@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Listeners;
+namespace BubbaOps\Framework\Listeners;
 
-use SlackPhp\BlockKit\Surfaces\Message;
-use SlackPhp\Framework\Coerce;
-use SlackPhp\Framework\Context;
-use SlackPhp\Framework\Listener;
+use BubbaOps\BlockKit\Surfaces\Message;
+use BubbaOps\Framework\Coerce;
+use BubbaOps\Framework\Context;
+use BubbaOps\Framework\Listener;
 
 /**
  * Simple listener that merely acks.

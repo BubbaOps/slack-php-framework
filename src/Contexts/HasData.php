@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Contexts;
+namespace BubbaOps\Framework\Contexts;
 
-use SlackPhp\Framework\Exception;
+use BubbaOps\Framework\Exception;
 
 trait HasData
 {

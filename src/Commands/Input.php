@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Commands;
+namespace BubbaOps\Framework\Commands;
 
-use SlackPhp\Framework\Contexts\HasData;
+use BubbaOps\Framework\Contexts\HasData;
 
 class Input
 {

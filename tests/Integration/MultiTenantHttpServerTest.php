@@ -1,12 +1,12 @@
 <?php
 
-namespace SlackPhp\Framework\Tests\Integration;
+namespace BubbaOps\Framework\Tests\Integration;
 
 use Nyholm\Psr7\ServerRequest;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
-use SlackPhp\Framework\Http\MultiTenantHttpServer;
-use SlackPhp\Framework\Tests\Fakes\FakeResponseEmitter;
+use BubbaOps\Framework\Http\MultiTenantHttpServer;
+use BubbaOps\Framework\Tests\Fakes\FakeResponseEmitter;
 
 class MultiTenantHttpServerTest extends TestCase
 {
@@ -19,7 +19,7 @@ class MultiTenantHttpServerTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        putenv('SLACKPHP_SKIP_AUTH=1');
+        putenv('BubbaOps_SKIP_AUTH=1');
         $this->request = new ServerRequest('POST', '/', ['Content-Type' => 'application/json'], '{}');
         $this->responseEmitter = new FakeResponseEmitter();
         $this->server = MultiTenantHttpServer::new()
@@ -31,7 +31,7 @@ class MultiTenantHttpServerTest extends TestCase
 
     protected function tearDown(): void
     {
-        putenv('SLACKPHP_SKIP_AUTH=');
+        putenv('BubbaOps_SKIP_AUTH=');
         parent::tearDown();
     }
 

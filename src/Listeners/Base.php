@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Listeners;
+namespace BubbaOps\Framework\Listeners;
 
-use SlackPhp\Framework\Context;
-use SlackPhp\Framework\Listener;
+use BubbaOps\Framework\Context;
+use BubbaOps\Framework\Listener;
 
 /**
  * Base class for listener classes that may have both sync (pre-"ack") and async (post-"ack") logic.

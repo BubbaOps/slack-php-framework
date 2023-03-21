@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Http;
+namespace BubbaOps\Framework\Http;
 
 use function array_filter;
 use const ARRAY_FILTER_USE_KEY;
@@ -11,8 +11,8 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface as HandlerInterface;
-use SlackPhp\Framework\Context;
-use SlackPhp\Framework\Contexts\Payload;
+use BubbaOps\Framework\Context;
+use BubbaOps\Framework\Contexts\Payload;
 use function strpos;
 use Throwable;
 

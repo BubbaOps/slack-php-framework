@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework;
+namespace BubbaOps\Framework;
 
 use function array_filter;
 use ArrayAccess;
@@ -14,23 +14,23 @@ use function json_encode;
 use JsonException;
 use JsonSerializable;
 use Psr\Container\ContainerInterface;
-use SlackPhp\BlockKit\Formatter;
-use SlackPhp\BlockKit\Kit;
-use SlackPhp\BlockKit\Partials\OptionList;
-use SlackPhp\BlockKit\Surfaces\AppHome;
-use SlackPhp\BlockKit\Surfaces\Message;
-use SlackPhp\Framework\Clients\ApiClient;
-use SlackPhp\Framework\Clients\RespondClient;
-use SlackPhp\Framework\Clients\SimpleApiClient;
-use SlackPhp\Framework\Clients\SimpleRespondClient;
-use SlackPhp\Framework\Contexts\Blocks;
-use SlackPhp\Framework\Contexts\Error;
-use SlackPhp\Framework\Contexts\HasData;
-use SlackPhp\Framework\Contexts\Home;
-use SlackPhp\Framework\Contexts\Modals;
-use SlackPhp\Framework\Contexts\Payload;
-use SlackPhp\Framework\Contexts\PayloadType;
-use SlackPhp\Framework\Contexts\View;
+use BubbaOps\BlockKit\Formatter;
+use BubbaOps\BlockKit\Kit;
+use BubbaOps\BlockKit\Partials\OptionList;
+use BubbaOps\BlockKit\Surfaces\AppHome;
+use BubbaOps\BlockKit\Surfaces\Message;
+use BubbaOps\Framework\Clients\ApiClient;
+use BubbaOps\Framework\Clients\RespondClient;
+use BubbaOps\Framework\Clients\SimpleApiClient;
+use BubbaOps\Framework\Clients\SimpleRespondClient;
+use BubbaOps\Framework\Contexts\Blocks;
+use BubbaOps\Framework\Contexts\Error;
+use BubbaOps\Framework\Contexts\HasData;
+use BubbaOps\Framework\Contexts\Home;
+use BubbaOps\Framework\Contexts\Modals;
+use BubbaOps\Framework\Contexts\Payload;
+use BubbaOps\Framework\Contexts\PayloadType;
+use BubbaOps\Framework\Contexts\View;
 use Throwable;
 
 /**

@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Http;
+namespace BubbaOps\Framework\Http;
 
 use Nyholm\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface as HandlerInterface;
-use SlackPhp\Framework\Application;
-use SlackPhp\Framework\Context;
-use SlackPhp\Framework\Deferral\PreAckDeferrer;
-use SlackPhp\Framework\Deferrer;
+use BubbaOps\Framework\Application;
+use BubbaOps\Framework\Context;
+use BubbaOps\Framework\Deferral\PreAckDeferrer;
+use BubbaOps\Framework\Deferrer;
 
 class AppHandler implements HandlerInterface
 {

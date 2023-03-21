@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Http;
+namespace BubbaOps\Framework\Http;
 
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Nyholm\Psr7\Response;
@@ -10,8 +10,8 @@ use Nyholm\Psr7Server\ServerRequestCreator;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface as HandlerInterface;
-use SlackPhp\Framework\AppServer;
-use SlackPhp\Framework\Deferrer;
+use BubbaOps\Framework\AppServer;
+use BubbaOps\Framework\Deferrer;
 use Throwable;
 
 class HttpServer extends AppServer

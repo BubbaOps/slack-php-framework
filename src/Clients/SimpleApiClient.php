@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Clients;
+namespace BubbaOps\Framework\Clients;
 
 class SimpleApiClient implements ApiClient
 {

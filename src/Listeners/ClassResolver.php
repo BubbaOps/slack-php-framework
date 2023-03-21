@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Listeners;
+namespace BubbaOps\Framework\Listeners;
 
-use SlackPhp\Framework\Context;
-use SlackPhp\Framework\Exception;
-use SlackPhp\Framework\Listener;
+use BubbaOps\Framework\Context;
+use BubbaOps\Framework\Exception;
+use BubbaOps\Framework\Listener;
 use Throwable;
 
 class ClassResolver implements Listener

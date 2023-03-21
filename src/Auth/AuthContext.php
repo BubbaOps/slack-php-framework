@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Auth;
+namespace BubbaOps\Framework\Auth;
 
 use function abs;
 use function hash_equals;

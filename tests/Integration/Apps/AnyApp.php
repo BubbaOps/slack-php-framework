@@ -1,10 +1,10 @@
 <?php
 
-namespace SlackPhp\Framework\Tests\Integration\Apps;
+namespace BubbaOps\Framework\Tests\Integration\Apps;
 
-use SlackPhp\Framework\BaseApp;
-use SlackPhp\Framework\Context;
-use SlackPhp\Framework\Router;
+use BubbaOps\Framework\BaseApp;
+use BubbaOps\Framework\Context;
+use BubbaOps\Framework\Router;
 
 class AnyApp extends BaseApp
 {

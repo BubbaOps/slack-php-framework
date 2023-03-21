@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework;
+namespace BubbaOps\Framework;
 
 use JsonSerializable;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
-use SlackPhp\Framework\Auth\AppCredentials;
-use SlackPhp\Framework\Auth\TokenStore;
-use SlackPhp\Framework\Contexts\PayloadType;
+use BubbaOps\Framework\Auth\AppCredentials;
+use BubbaOps\Framework\Auth\TokenStore;
+use BubbaOps\Framework\Contexts\PayloadType;
 
 /**
  * Provides a fluent, app builder interface.

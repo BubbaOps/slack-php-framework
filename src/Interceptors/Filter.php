@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Interceptors;
+namespace BubbaOps\Framework\Interceptors;
 
-use SlackPhp\Framework\Coerce;
-use SlackPhp\Framework\Context;
-use SlackPhp\Framework\Interceptor;
-use SlackPhp\Framework\Listener;
-use SlackPhp\Framework\Listeners\Undefined;
+use BubbaOps\Framework\Coerce;
+use BubbaOps\Framework\Context;
+use BubbaOps\Framework\Interceptor;
+use BubbaOps\Framework\Listener;
+use BubbaOps\Framework\Listeners\Undefined;
 
 abstract class Filter implements Interceptor
 {

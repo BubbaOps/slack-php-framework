@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Auth;
+namespace BubbaOps\Framework\Auth;
 
-use SlackPhp\Framework\Env;
-use SlackPhp\Framework\Exception;
+use BubbaOps\Framework\Env;
+use BubbaOps\Framework\Exception;
 
 class SingleAppCredentialsStore implements AppCredentialsStore
 {

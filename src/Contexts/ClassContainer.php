@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Contexts;
+namespace BubbaOps\Framework\Contexts;
 
 use function class_exists;
 use Psr\Container\ContainerInterface;
-use SlackPhp\Framework\Exception;
+use BubbaOps\Framework\Exception;
 
 class ClassContainer implements ContainerInterface
 {

@@ -1,5 +1,5 @@
 {
-    "name": "slack-php/slack-app-framework",
+    "name": "slack-php/slack-php-framework",
     "type": "library",
     "license": "MIT",
     "description": "Provides a foundation upon which to build a Slack application in PHP",
@@ -7,6 +7,10 @@
         {
             "name": "Jeremy Lindblom",
             "email": "jeremeamia@gmail.com"
+        },
+        {
+          "name": "Bubba Hines",
+          "email": "bubba@stechstudio.com"
         }
     ],
     "config": {
@@ -31,7 +35,7 @@
     },
     "autoload": {
         "psr-4": {
-            "SlackPhp\\Framework\\": "src/"
+            "BubbaOps\\Framework\\": "src/"
         }
     },
     "require-dev": {
@@ -41,7 +45,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "SlackPhp\\Framework\\Tests\\": "tests/"
+            "BubbaOps\\Framework\\Tests\\": "tests/"
         }
     },
     "scripts": {

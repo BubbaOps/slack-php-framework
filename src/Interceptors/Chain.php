@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Interceptors;
+namespace BubbaOps\Framework\Interceptors;
 
-use SlackPhp\Framework\Context;
-use SlackPhp\Framework\Interceptor;
-use SlackPhp\Framework\Listener;
-use SlackPhp\Framework\Listeners\Intercepted;
+use BubbaOps\Framework\Context;
+use BubbaOps\Framework\Interceptor;
+use BubbaOps\Framework\Listener;
+use BubbaOps\Framework\Listeners\Intercepted;
 
 class Chain implements Interceptor
 {

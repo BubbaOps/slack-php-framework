@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Contexts;
+namespace BubbaOps\Framework\Contexts;
 
-use SlackPhp\BlockKit\Surfaces\Modal;
-use SlackPhp\Framework\Coerce;
-use SlackPhp\Framework\Context;
-use SlackPhp\Framework\Exception;
+use BubbaOps\BlockKit\Surfaces\Modal;
+use BubbaOps\Framework\Coerce;
+use BubbaOps\Framework\Context;
+use BubbaOps\Framework\Exception;
 use Throwable;
 
 /**

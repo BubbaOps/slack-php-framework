@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Contexts;
+namespace BubbaOps\Framework\Contexts;
 
 use JsonSerializable;
-use SlackPhp\Framework\Context;
+use BubbaOps\Framework\Context;
 
 /**
  * Normalizes state data from all input types in `view_submission`s to key-value pairs.

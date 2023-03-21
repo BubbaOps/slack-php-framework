@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Deferral;
+namespace BubbaOps\Framework\Deferral;
 
 use Closure;
-use SlackPhp\Framework\AppServer;
-use SlackPhp\Framework\Context;
-use SlackPhp\Framework\Exception;
+use BubbaOps\Framework\AppServer;
+use BubbaOps\Framework\Context;
+use BubbaOps\Framework\Exception;
 use Throwable;
 
 /**

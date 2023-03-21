@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Clients;
+namespace BubbaOps\Framework\Clients;
 
-use SlackPhp\BlockKit\Surfaces\Message;
-use SlackPhp\Framework\Exception;
+use BubbaOps\BlockKit\Surfaces\Message;
+use BubbaOps\Framework\Exception;
 
 interface RespondClient
 {

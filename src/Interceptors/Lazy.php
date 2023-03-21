@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Interceptors;
+namespace BubbaOps\Framework\Interceptors;
 
 use Closure;
-use SlackPhp\Framework\Context;
-use SlackPhp\Framework\Interceptor;
-use SlackPhp\Framework\Listener;
+use BubbaOps\Framework\Context;
+use BubbaOps\Framework\Interceptor;
+use BubbaOps\Framework\Listener;
 
 /**
  * Lazily creates an interceptor at the time that it needs to be executed.

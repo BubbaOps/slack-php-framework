@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Http;
+namespace BubbaOps\Framework\Http;
 
 use function header;
 use function headers_sent;

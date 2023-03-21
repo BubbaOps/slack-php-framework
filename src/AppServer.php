@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework;
+namespace BubbaOps\Framework;
 
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use SlackPhp\Framework\Auth\AppCredentials;
-use SlackPhp\Framework\Auth\AppCredentialsStore;
+use BubbaOps\Framework\Auth\AppCredentials;
+use BubbaOps\Framework\Auth\AppCredentialsStore;
 
 /**
  * An AppServer is a protocol-specific and/or framework-specific app runner.

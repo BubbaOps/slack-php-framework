@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework;
+namespace BubbaOps\Framework;
 
 /**
  * Defers additional processing on a context until after the initial "ack", in order to avoid Slack's 3-second timeout.

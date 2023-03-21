@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Contexts;
+namespace BubbaOps\Framework\Contexts;
 
-use SlackPhp\BlockKit\Config;
-use SlackPhp\BlockKit\Kit;
-use SlackPhp\BlockKit\Partials\OptionList;
-use SlackPhp\BlockKit\Surfaces;
+use BubbaOps\BlockKit\Config;
+use BubbaOps\BlockKit\Kit;
+use BubbaOps\BlockKit\Partials\OptionList;
+use BubbaOps\BlockKit\Surfaces;
 
 class Blocks
 {

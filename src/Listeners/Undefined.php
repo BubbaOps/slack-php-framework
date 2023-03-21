@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Listeners;
+namespace BubbaOps\Framework\Listeners;
 
-use SlackPhp\Framework\Context;
-use SlackPhp\Framework\Listener;
+use BubbaOps\Framework\Context;
+use BubbaOps\Framework\Listener;
 
 class Undefined implements Listener
 {

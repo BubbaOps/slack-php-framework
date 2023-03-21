@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Commands;
+namespace BubbaOps\Framework\Commands;
 
-use SlackPhp\Framework\Context;
-use SlackPhp\Framework\Listener;
+use BubbaOps\Framework\Context;
+use BubbaOps\Framework\Listener;
 
 abstract class CommandListener implements Listener
 {

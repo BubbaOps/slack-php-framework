@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Deferral;
+namespace BubbaOps\Framework\Deferral;
 
 use function base64_encode;
 use Closure;
@@ -10,9 +10,9 @@ use function escapeshellarg;
 use function is_dir;
 use function json_encode;
 use function shell_exec;
-use SlackPhp\Framework\Context;
-use SlackPhp\Framework\Deferrer;
-use SlackPhp\Framework\Exception;
+use BubbaOps\Framework\Context;
+use BubbaOps\Framework\Deferrer;
+use BubbaOps\Framework\Exception;
 
 /**
  * Defers context processing for async logic by shelling out to an external, background-running script.

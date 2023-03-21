@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Http;
+namespace BubbaOps\Framework\Http;
 
 use Closure;
 use Psr\Http\Message\ServerRequestInterface;
-use SlackPhp\Framework\Application;
-use SlackPhp\Framework\Coerce;
+use BubbaOps\Framework\Application;
+use BubbaOps\Framework\Coerce;
 
 class MultiTenantHttpServer extends HttpServer
 {

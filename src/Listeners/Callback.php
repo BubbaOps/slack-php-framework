@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Listeners;
+namespace BubbaOps\Framework\Listeners;
 
 use Closure;
 use function is_string;
 use function realpath;
-use SlackPhp\Framework\Context;
-use SlackPhp\Framework\Exception;
-use SlackPhp\Framework\Listener;
+use BubbaOps\Framework\Context;
+use BubbaOps\Framework\Exception;
+use BubbaOps\Framework\Listener;
 
 /**
  * Listener that has its logic provided as a callback function.

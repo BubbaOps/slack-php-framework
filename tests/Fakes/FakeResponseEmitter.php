@@ -1,10 +1,10 @@
 <?php
 
-namespace SlackPhp\Framework\Tests\Fakes;
+namespace BubbaOps\Framework\Tests\Fakes;
 
 use Closure;
 use Psr\Http\Message\ResponseInterface;
-use SlackPhp\Framework\Http\ResponseEmitter;
+use BubbaOps\Framework\Http\ResponseEmitter;
 
 class FakeResponseEmitter implements ResponseEmitter
 {

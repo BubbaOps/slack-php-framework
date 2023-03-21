@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Clients;
+namespace BubbaOps\Framework\Clients;
 
-use SlackPhp\BlockKit\Surfaces\Message;
+use BubbaOps\BlockKit\Surfaces\Message;
 
 class SimpleRespondClient implements RespondClient
 {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework;
+namespace BubbaOps\Framework;
 
-use SlackPhp\BlockKit\Surfaces;
+use BubbaOps\BlockKit\Surfaces;
 
 /**
  * Provides helpers for coercing loosely-typed values to their actual, desired type.

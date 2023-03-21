@@ -1,6 +1,7 @@
 <header>
   <h1 align="center">Slack App Framework for PHP</h1>
   <p align="center">By Jeremy Lindblom (<a href="https://twitter.com/jeremeamia">@jeremeamia</a>)</p>
+  <p align="center">Forked By Bubba Hines</p>
 </header>
 
 <p align="center">
@@ -54,7 +55,7 @@ root URL of your deployed app code.
 
 When developing the app code, you declare one or more `Listener`s using the `App`'s routing methods that correspond to
 the different types of app interaction. `Listener`s can be declared as closures, or as objects and class names of type
-`SlackPhp\Framework\Listener`. A `Listener` receives a `Context` object, which contains the payload data provided by
+`BubbaOps\Framework\Listener`. A `Listener` receives a `Context` object, which contains the payload data provided by
 Slack to the app and provides methods for all the actions you can take to interact with or communicate back to Slack.
 
 ## Quick Example
@@ -69,8 +70,8 @@ This small app responds to the `/cool` slash command.
 ```php
 <?php
 
-use SlackPhp\Framework\App;
-use SlackPhp\Framework\Context;
+use BubbaOps\Framework\App;
+use BubbaOps\Framework\Context;
 
 App::new()
     ->command('cool', function (Context $ctx) {
@@ -99,8 +100,8 @@ the app home page.
 
 declare(strict_types=1);
 
-use SlackPhp\BlockKit\Surfaces\{Message, Modal};
-use SlackPhp\Framework\{App, Context, Route};
+use BubbaOps\BlockKit\Surfaces\{Message, Modal};
+use BubbaOps\Framework\{App, Context, Route};
 
 // Helper for creating a modal with the "hello-form" for choosing a greeting.
 $createModal = function (): Modal {
@@ -191,7 +192,7 @@ declare(strict_types=1);
 
 namespace MyApp;
 
-use SlackPhp\Framework\{BaseApp, Route, Router};
+use BubbaOps\Framework\{BaseApp, Route, Router};
 use MyApp\Listeners;
 
 class MyCoolApp extends BaseApp
@@ -309,7 +310,7 @@ $ctx->container(): ContainerInterface // Returns an instance of the configured P
 The following features are known to be missing:
 
 - OAuth flow for handling installations to a different workspace.
-    - Though there are some class in the `SlackPhp\Framework\Auth` namespace if you need to roll your own right now.
+    - Though there are some class in the `BubbaOps\Framework\Auth` namespace if you need to roll your own right now.
 
 ## Standards Used
 

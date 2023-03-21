@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework;
+namespace BubbaOps\Framework;
 
 /**
  * Base class for Applications created as a class, instead of using the fluent App façade interface.

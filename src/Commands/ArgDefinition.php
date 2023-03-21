@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Commands;
+namespace BubbaOps\Framework\Commands;
 
 class ArgDefinition
 {

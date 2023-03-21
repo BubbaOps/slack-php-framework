@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Interceptors\Filters;
+namespace BubbaOps\Framework\Interceptors\Filters;
 
-use SlackPhp\Framework\Context;
-use SlackPhp\Framework\Interceptors\Filter;
-use SlackPhp\Framework\Listener;
+use BubbaOps\Framework\Context;
+use BubbaOps\Framework\Interceptors\Filter;
+use BubbaOps\Framework\Listener;
 
 class FieldFilter extends Filter
 {

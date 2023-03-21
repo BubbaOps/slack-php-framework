@@ -1,6 +1,6 @@
 <?php
 
-namespace SlackPhp\Framework\Tests\Integration;
+namespace BubbaOps\Framework\Tests\Integration;
 
 use Nyholm\Psr7\Factory\Psr17Factory;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -8,15 +8,15 @@ use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
-use SlackPhp\BlockKit\Surfaces\Message;
-use SlackPhp\Framework\Clients\ApiClient;
-use SlackPhp\Framework\Clients\RespondClient;
-use SlackPhp\Framework\Context;
-use SlackPhp\Framework\Contexts\DataBag;
-use SlackPhp\Framework\Http\HttpServer;
-use SlackPhp\Framework\Interceptor;
-use SlackPhp\Framework\Interceptors\Tap;
-use SlackPhp\Framework\Tests\Fakes\FakeResponseEmitter;
+use BubbaOps\BlockKit\Surfaces\Message;
+use BubbaOps\Framework\Clients\ApiClient;
+use BubbaOps\Framework\Clients\RespondClient;
+use BubbaOps\Framework\Context;
+use BubbaOps\Framework\Contexts\DataBag;
+use BubbaOps\Framework\Http\HttpServer;
+use BubbaOps\Framework\Interceptor;
+use BubbaOps\Framework\Interceptors\Tap;
+use BubbaOps\Framework\Tests\Fakes\FakeResponseEmitter;
 
 class IntegTestCase extends TestCase
 {

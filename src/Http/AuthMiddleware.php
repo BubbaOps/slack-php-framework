@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Http;
+namespace BubbaOps\Framework\Http;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use SlackPhp\Framework\Auth\AppCredentials;
-use SlackPhp\Framework\Auth\AuthContext;
-use SlackPhp\Framework\Auth\AuthException;
-use SlackPhp\Framework\Env;
+use BubbaOps\Framework\Auth\AppCredentials;
+use BubbaOps\Framework\Auth\AuthContext;
+use BubbaOps\Framework\Auth\AuthException;
+use BubbaOps\Framework\Env;
 
 class AuthMiddleware implements MiddlewareInterface
 {
@@ -34,7 +34,7 @@ class AuthMiddleware implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        // Authentication can be disabled via env var `SLACKPHP_SKIP_AUTH=1` (for testing purposes only).
+        // Authentication can be disabled via env var `BubbaOps_SKIP_AUTH=1` (for testing purposes only).
         if (Env::getSkipAuth()) {
             return $handler->handle($request);
         }

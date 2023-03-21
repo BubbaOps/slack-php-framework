@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework;
+namespace BubbaOps\Framework;
 
 use Closure;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use SlackPhp\BlockKit\Surfaces\AppHome;
-use SlackPhp\BlockKit\Surfaces\Message;
-use SlackPhp\BlockKit\Surfaces\Modal;
-use SlackPhp\Framework\Auth\AppCredentials;
-use SlackPhp\Framework\Auth\SingleTeamTokenStore;
-use SlackPhp\Framework\Auth\TokenStore;
-use SlackPhp\Framework\Contexts\ClassContainer;
+use BubbaOps\BlockKit\Surfaces\AppHome;
+use BubbaOps\BlockKit\Surfaces\Message;
+use BubbaOps\BlockKit\Surfaces\Modal;
+use BubbaOps\Framework\Auth\AppCredentials;
+use BubbaOps\Framework\Auth\SingleTeamTokenStore;
+use BubbaOps\Framework\Auth\TokenStore;
+use BubbaOps\Framework\Contexts\ClassContainer;
 
 /**
  * Configuration for a Slack Application.

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Clients;
+namespace BubbaOps\Framework\Clients;
 
 use function array_filter;
-use SlackPhp\Framework\Exception;
+use BubbaOps\Framework\Exception;
 
 class OAuthClient
 {

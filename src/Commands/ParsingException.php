@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Commands;
+namespace BubbaOps\Framework\Commands;
 
-use SlackPhp\Framework\Exception;
+use BubbaOps\Framework\Exception;
 
 class ParsingException extends Exception
 {

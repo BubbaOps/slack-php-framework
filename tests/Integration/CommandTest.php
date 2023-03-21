@@ -1,12 +1,12 @@
 <?php
 
-namespace SlackPhp\Framework\Tests\Integration;
+namespace BubbaOps\Framework\Tests\Integration;
 
-use SlackPhp\Framework\App;
-use SlackPhp\Framework\Commands\CommandListener;
-use SlackPhp\Framework\Commands\DefinitionBuilder;
-use SlackPhp\Framework\Commands\Input;
-use SlackPhp\Framework\Context;
+use BubbaOps\Framework\App;
+use BubbaOps\Framework\Commands\CommandListener;
+use BubbaOps\Framework\Commands\DefinitionBuilder;
+use BubbaOps\Framework\Commands\Input;
+use BubbaOps\Framework\Context;
 
 class CommandTest extends IntegTestCase
 {

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Listeners;
+namespace BubbaOps\Framework\Listeners;
 
-use SlackPhp\Framework\Context;
-use SlackPhp\Framework\Contexts\PayloadType;
-use SlackPhp\Framework\Listener;
+use BubbaOps\Framework\Context;
+use BubbaOps\Framework\Contexts\PayloadType;
+use BubbaOps\Framework\Listener;
 
 /**
  * Simple listener that displays/logs a "Work in progress" message in whichever medium makes the most sense.

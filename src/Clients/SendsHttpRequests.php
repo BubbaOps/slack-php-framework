@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Clients;
+namespace BubbaOps\Framework\Clients;
 
 use function compact;
 use function file_get_contents;
@@ -10,7 +10,7 @@ use function http_build_query;
 use function json_decode;
 use function json_encode;
 use JsonException;
-use SlackPhp\Framework\Exception;
+use BubbaOps\Framework\Exception;
 use function sprintf;
 use function stream_context_create;
 use function strlen;

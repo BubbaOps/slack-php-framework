@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Auth;
+namespace BubbaOps\Framework\Auth;
 
-use SlackPhp\Framework\Env;
+use BubbaOps\Framework\Env;
 
 /**
  * Contains credentials required for all types of app authentication.

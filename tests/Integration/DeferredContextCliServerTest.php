@@ -1,13 +1,13 @@
 <?php
 
-namespace SlackPhp\Framework\Tests\Integration;
+namespace BubbaOps\Framework\Tests\Integration;
 
 use PHPUnit\Framework\TestCase;
-use SlackPhp\BlockKit\Surfaces\Message;
-use SlackPhp\Framework\App;
-use SlackPhp\Framework\Clients\RespondClient;
-use SlackPhp\Framework\Context;
-use SlackPhp\Framework\Deferral\DeferredContextCliServer;
+use BubbaOps\BlockKit\Surfaces\Message;
+use BubbaOps\Framework\App;
+use BubbaOps\Framework\Clients\RespondClient;
+use BubbaOps\Framework\Context;
+use BubbaOps\Framework\Deferral\DeferredContextCliServer;
 
 class DeferredContextCliServerTest extends TestCase
 {

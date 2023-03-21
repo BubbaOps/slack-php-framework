@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework\Commands;
+namespace BubbaOps\Framework\Commands;
 
 use function array_keys;
 use function array_map;
@@ -14,9 +14,9 @@ use function explode;
 use function implode;
 use function max;
 use function natsort;
-use SlackPhp\Framework\Coerce;
-use SlackPhp\Framework\Context;
-use SlackPhp\Framework\Listener;
+use BubbaOps\Framework\Coerce;
+use BubbaOps\Framework\Context;
+use BubbaOps\Framework\Listener;
 
 /**
  * Routes commands to sub-routers (aka. sub-commands) based on params parsed from command text.

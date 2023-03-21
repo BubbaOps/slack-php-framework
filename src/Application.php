@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework;
+namespace BubbaOps\Framework;
 
 /**
  * A Slack application for reacting to Slack events, user-initiated commands, or other user interactions with Slack.

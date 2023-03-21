@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework;
+namespace BubbaOps\Framework;
 
 use JsonSerializable;
-use SlackPhp\Framework\Contexts\PayloadType;
+use BubbaOps\Framework\Contexts\PayloadType;
 
 /**
  * Routes app contexts by their payload type and IDs.

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SlackPhp\Framework;
+namespace BubbaOps\Framework;
 
 /**
  * A collection of easy-to-incorporate, interceptor-applying helper methods for wrapping listeners.

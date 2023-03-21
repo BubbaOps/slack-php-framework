@@ -1,6 +1,6 @@
 <?php
 
-use SlackPhp\Framework\App;
-use SlackPhp\Framework\Context;
+use BubbaOps\Framework\App;
+use BubbaOps\Framework\Context;
 
 return App::new()->any(fn (Context $ctx) => $ctx->ack('hello'));
