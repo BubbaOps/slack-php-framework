@@ -1,5 +1,5 @@
 {
-    "name": "slack-php/slack-php-framework",
+    "name": "bubbaops/slack-php-framework",
     "type": "library",
     "license": "MIT",
     "description": "Provides a foundation upon which to build a Slack application in PHP",
