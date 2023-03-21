@@ -12,11 +12,11 @@
     "config": {
         "sort-packages": true,
         "platform": {
-            "php": "7.4"
+            "php": "8.1"
         }
     },
     "require": {
-        "php": ">=7.4",
+        "php": ">=8.1",
         "ext-ctype": "*",
         "ext-json": "*",
         "slack-php/slack-block-kit": "^0.19.0 || ^1.0.0",
@@ -35,9 +35,9 @@
         }
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.18",
+        "laravel/pint": "^1.0",
         "phpstan/phpstan": "^0.12.77",
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^9.6"
     },
     "autoload-dev": {
         "psr-4": {
@@ -45,9 +45,8 @@
         }
     },
     "scripts": {
-        "style-lint": "php-cs-fixer fix --dry-run --verbose --show-progress=none",
-        "style-fix": "php-cs-fixer fix",
-        "stan": "phpstan analyse --level=5 src tests",
+        "format": "vendor/bin/pint",
+        "stan": "vendor/bin/phpstan analyse --level=5 src tests",
         "test": "phpunit --bootstrap=vendor/autoload.php --no-coverage tests",
         "test-coverage": "XDEBUG_MODE=coverage phpunit --bootstrap=vendor/autoload.php --coverage-html=build/coverage --whitelist=src tests",
         "test-debug": "XDEBUG_MODE=debug phpunit --bootstrap=vendor/autoload.php --no-coverage --debug tests",
