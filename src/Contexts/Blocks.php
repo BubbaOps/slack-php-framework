@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace SlackPhp\Framework\Contexts;
 
-use SlackPhp\BlockKit\{Config, Kit, Surfaces};
+use SlackPhp\BlockKit\Config;
+use SlackPhp\BlockKit\Kit;
 use SlackPhp\BlockKit\Partials\OptionList;
+use SlackPhp\BlockKit\Surfaces;
 
 class Blocks
 {

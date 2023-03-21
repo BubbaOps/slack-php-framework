@@ -4,14 +4,19 @@ declare(strict_types=1);
 
 namespace SlackPhp\Framework\Http;
 
-use SlackPhp\Framework\Auth\{AppCredentials, AuthContext, AuthException};
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
+use SlackPhp\Framework\Auth\AppCredentials;
+use SlackPhp\Framework\Auth\AuthContext;
+use SlackPhp\Framework\Auth\AuthException;
 use SlackPhp\Framework\Env;
-use Psr\Http\Message\{ResponseInterface, ServerRequestInterface};
-use Psr\Http\Server\{MiddlewareInterface, RequestHandlerInterface};
 
 class AuthMiddleware implements MiddlewareInterface
 {
     private const HEADER_SIGNATURE = 'X-Slack-Signature';
+
     private const HEADER_TIMESTAMP = 'X-Slack-Request-Timestamp';
 
     private AppCredentials $appCredentials;
@@ -26,10 +31,6 @@ class AuthMiddleware implements MiddlewareInterface
      *
      * Currently, there is only one implementation: v0. In the future, there could be multiple. The Signature version
      * is included in the signature header, which is formatted like this: `X-Slack-Signature: {version}={signature}`
-     *
-     * @param ServerRequestInterface $request
-     * @param RequestHandlerInterface $handler
-     * @return ResponseInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
@@ -39,7 +40,7 @@ class AuthMiddleware implements MiddlewareInterface
         }
 
         // Ensure the necessary credentials have been supplied.
-        if (!$this->appCredentials->supportsHttpAuth()) {
+        if (! $this->appCredentials->supportsHttpAuth()) {
             throw new AuthException('No signing key provided', 401);
         }
 
@@ -51,13 +52,10 @@ class AuthMiddleware implements MiddlewareInterface
 
     /**
      * Creates an authentication context in which a signature can be validated for the request.
-     *
-     * @param ServerRequestInterface $request
-     * @return AuthContext
      */
     private function getAuthContext(ServerRequestInterface $request): AuthContext
     {
-        if (!$request->hasHeader(self::HEADER_TIMESTAMP) || !$request->hasHeader(self::HEADER_SIGNATURE)) {
+        if (! $request->hasHeader(self::HEADER_TIMESTAMP) || ! $request->hasHeader(self::HEADER_SIGNATURE)) {
             throw new AuthException('Missing required headers for authentication');
         }
 

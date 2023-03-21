@@ -9,7 +9,9 @@ use SlackPhp\BlockKit\Surfaces\Message;
 class Definition
 {
     private string $name;
+
     private ?string $subCommand;
+
     private string $description;
 
     /** @var ArgDefinition[] */
@@ -32,25 +34,16 @@ class Definition
         $this->opts = $opts;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSubCommand(): ?string
     {
         return $this->subCommand;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
@@ -102,6 +95,6 @@ class Definition
             $opts .= "\n  {$opt->getFormat()}";
         }
 
-        return implode(' ', $parts) . $opts;
+        return implode(' ', $parts).$opts;
     }
 }

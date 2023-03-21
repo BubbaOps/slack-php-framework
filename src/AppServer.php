@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace SlackPhp\Framework;
 
-use Psr\Log\{LoggerInterface, NullLogger};
-use SlackPhp\Framework\Auth\{AppCredentials, AppCredentialsStore};
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
+use SlackPhp\Framework\Auth\AppCredentials;
+use SlackPhp\Framework\Auth\AppCredentialsStore;
 
 /**
  * An AppServer is a protocol-specific and/or framework-specific app runner.
@@ -21,7 +23,9 @@ use SlackPhp\Framework\Auth\{AppCredentials, AppCredentialsStore};
 abstract class AppServer
 {
     private ?Application $app;
+
     private ?AppCredentialsStore $appCredentialsStore;
+
     private ?LoggerInterface $logger;
 
     /**
@@ -45,7 +49,7 @@ abstract class AppServer
     }
 
     /**
-     * @param Application|Listener|callable(Context): void|class-string $app
+     * @param  Application|Listener|callable(Context): void|class-string  $app
      * @return $this
      */
     public function withApp($app): self
@@ -53,7 +57,7 @@ abstract class AppServer
         $this->app = Coerce::application($app);
 
         // If the Server has no logger, use the application's logger.
-        if (!isset($this->logger)) {
+        if (! isset($this->logger)) {
             $this->logger = $this->app->getConfig()->getLogger()->unwrap();
         }
 
@@ -62,12 +66,10 @@ abstract class AppServer
 
     /**
      * Gets the application being run by the Server
-     *
-     * @return Application
      */
     protected function getApp(): Application
     {
-        if (!isset($this->app)) {
+        if (! isset($this->app)) {
             $this->withApp(new Application());
         }
 
@@ -82,7 +84,6 @@ abstract class AppServer
     /**
      * Sets the app credentials store for the Server.
      *
-     * @param AppCredentialsStore $appCredentialsStore
      * @return $this
      */
     public function withAppCredentialsStore(AppCredentialsStore $appCredentialsStore): self
@@ -96,15 +97,13 @@ abstract class AppServer
      * Gets the app credentials to use for authenticating the app being run by the Server.
      *
      * If app credentials are not provided in the AppConfig, the app credentials store will be used to fetch them.
-     *
-     * @return AppCredentials
      */
     protected function getAppCredentials(): AppCredentials
     {
         $config = $this->getApp()->getConfig();
         $credentials = $config->getAppCredentials();
 
-        if (!$credentials->supportsAnyAuth() && isset($this->appCredentialsStore)) {
+        if (! $credentials->supportsAnyAuth() && isset($this->appCredentialsStore)) {
             $credentials = $this->appCredentialsStore->getAppCredentials($config->getId());
             $config->withAppCredentials($credentials);
         }
@@ -115,7 +114,6 @@ abstract class AppServer
     /**
      * Sets the logger for the Server.
      *
-     * @param LoggerInterface $logger
      * @return $this
      */
     public function withLogger(LoggerInterface $logger): self
@@ -127,8 +125,6 @@ abstract class AppServer
 
     /**
      * Gets the logger for the Server.
-     *
-     * @return LoggerInterface
      */
     protected function getLogger(): LoggerInterface
     {

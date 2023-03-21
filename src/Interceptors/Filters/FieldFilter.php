@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace SlackPhp\Framework\Interceptors\Filters;
 
-use SlackPhp\Framework\{Context, Listener};
+use SlackPhp\Framework\Context;
 use SlackPhp\Framework\Interceptors\Filter;
+use SlackPhp\Framework\Listener;
 
 class FieldFilter extends Filter
 {
@@ -13,8 +14,8 @@ class FieldFilter extends Filter
     private $fields;
 
     /**
-     * @param array<string, mixed> $fields
-     * @param Listener|callable|class-string|null $defaultListener
+     * @param  array<string, mixed>  $fields
+     * @param  Listener|callable|class-string|null  $defaultListener
      */
     public function __construct(array $fields, $defaultListener = null)
     {
@@ -29,7 +30,7 @@ class FieldFilter extends Filter
                 ? $this->matchRegex($context, $field, substr($value, 6))
                 : $this->matchValue($context, $field, $value);
 
-            if (!$matched) {
+            if (! $matched) {
                 return false;
             }
         }

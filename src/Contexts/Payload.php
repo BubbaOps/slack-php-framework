@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace SlackPhp\Framework\Contexts;
 
+use function is_string;
+use function json_decode;
 use JsonException;
 use JsonSerializable;
-use UnexpectedValueException;
-
-use function json_decode;
-use function urldecode;
-use function is_string;
 use function parse_str;
+use UnexpectedValueException;
+use function urldecode;
 
 class Payload implements JsonSerializable
 {
@@ -20,9 +19,6 @@ class Payload implements JsonSerializable
     private PayloadType $type;
 
     /**
-     * @param string $body
-     * @param string $contentType
-     * @return self
      * @throws JsonException
      * @throws UnexpectedValueException
      */
@@ -72,8 +68,6 @@ class Payload implements JsonSerializable
 
     /**
      * Returns the main ID/name/type for the payload type used for route indexing.
-     *
-     * @return string|null
      */
     public function getTypeId(): ?string
     {
@@ -88,8 +82,6 @@ class Payload implements JsonSerializable
 
     /**
      * Returns the api_api_id property of the payload, common to almost all payload types.
-     *
-     * @return string|null
      */
     public function getAppId(): ?string
     {
@@ -98,8 +90,6 @@ class Payload implements JsonSerializable
 
     /**
      * Get the enterprise ID for the payload.
-     *
-     * @return string|null
      */
     public function getEnterpriseId(): ?string
     {
@@ -115,8 +105,6 @@ class Payload implements JsonSerializable
 
     /**
      * Get the team/workspace ID for the payload.
-     *
-     * @return string|null
      */
     public function getTeamId(): ?string
     {
@@ -125,8 +113,6 @@ class Payload implements JsonSerializable
 
     /**
      * Get the channel ID for the payload.
-     *
-     * @return string|null
      */
     public function getChannelId(): ?string
     {
@@ -135,8 +121,6 @@ class Payload implements JsonSerializable
 
     /**
      * Get the user ID for the payload.
-     *
-     * @return string|null
      */
     public function getUserId(): ?string
     {
@@ -145,8 +129,6 @@ class Payload implements JsonSerializable
 
     /**
      * Check if the payload is from and enterprise installation.
-     *
-     * @return bool
      */
     public function isEnterpriseInstall(): bool
     {
@@ -159,8 +141,6 @@ class Payload implements JsonSerializable
      * Get the submitted state from the payload, if present.
      *
      * Can be present for view_submission and some view_closed and block_action requests.
-     *
-     * @return DataBag
      */
     public function getState(): DataBag
     {
@@ -171,8 +151,6 @@ class Payload implements JsonSerializable
      * Get the private metadata from the payload, if present.
      *
      * Can be present for view_submission and some view_closed requests.
-     *
-     * @return PrivateMetadata
      */
     public function getMetadata(): PrivateMetadata
     {
@@ -188,8 +166,6 @@ class Payload implements JsonSerializable
      * Get the response URL from the payload, if present.
      *
      * Is present for anything that has a conversation context.
-     *
-     * @return string|null
      */
     public function getResponseUrl(): ?string
     {
@@ -201,8 +177,6 @@ class Payload implements JsonSerializable
 
     /**
      * Gets indentifying information about the payload for the purposes of logging/debugging.
-     *
-     * @return array
      */
     public function getSummary(): array
     {

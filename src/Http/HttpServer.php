@@ -4,22 +4,25 @@ declare(strict_types=1);
 
 namespace SlackPhp\Framework\Http;
 
-use SlackPhp\Framework\{Deferrer, AppServer};
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Nyholm\Psr7\Response;
 use Nyholm\Psr7Server\ServerRequestCreator;
-use Psr\Http\Message\{ResponseInterface, ServerRequestInterface};
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface as HandlerInterface;
+use SlackPhp\Framework\AppServer;
+use SlackPhp\Framework\Deferrer;
 use Throwable;
 
 class HttpServer extends AppServer
 {
     private ?Deferrer $deferrer;
+
     private ?ResponseEmitter $emitter;
+
     private ?ServerRequestInterface $request;
 
     /**
-     * @param Deferrer $deferrer
      * @return $this
      */
     public function withDeferrer(Deferrer $deferrer): self
@@ -30,7 +33,6 @@ class HttpServer extends AppServer
     }
 
     /**
-     * @param ServerRequestInterface $request
      * @return $this
      */
     public function withRequest(ServerRequestInterface $request): self
@@ -41,7 +43,6 @@ class HttpServer extends AppServer
     }
 
     /**
-     * @param ResponseEmitter $emitter
      * @return $this
      */
     public function withResponseEmitter(ResponseEmitter $emitter): self
@@ -69,12 +70,10 @@ class HttpServer extends AppServer
 
     /**
      * Gets a representation of the request data from super globals.
-     *
-     * @return ServerRequestInterface
      */
     protected function getRequest(): ServerRequestInterface
     {
-        if (!isset($this->request)) {
+        if (! isset($this->request)) {
             try {
                 $httpFactory = new Psr17Factory();
                 $requestFactory = new ServerRequestCreator($httpFactory, $httpFactory, $httpFactory, $httpFactory);
@@ -95,8 +94,6 @@ class HttpServer extends AppServer
 
     /**
      * Gets a request handler for the Slack app.
-     *
-     * @return HandlerInterface
      */
     protected function getHandler(): HandlerInterface
     {

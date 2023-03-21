@@ -40,7 +40,8 @@ class CommandTest extends IntegTestCase
             'text' => 'hello Jeremy --caps',
         ]);
 
-        $listener = new class() extends CommandListener {
+        $listener = new class() extends CommandListener
+        {
             protected static function buildDefinition(DefinitionBuilder $builder): DefinitionBuilder
             {
                 return $builder->name('test')->subCommand('hello')->arg('name')->opt('caps');

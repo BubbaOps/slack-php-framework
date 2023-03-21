@@ -40,17 +40,14 @@ final class PayloadType
 
     /**
      * Get the instance of the enum with the provided value.
-     *
-     * @param string $value
-     * @return self
      */
     public static function withValue(string $value): self
     {
-        if (!array_key_exists($value, self::$instances)) {
+        if (! array_key_exists($value, self::$instances)) {
             $value = 'unknown';
         }
 
-        if (!isset(self::$instances[$value])) {
+        if (! isset(self::$instances[$value])) {
             self::$instances[$value] = new self($value);
         }
 

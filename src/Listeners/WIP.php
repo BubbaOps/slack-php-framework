@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace SlackPhp\Framework\Listeners;
 
-use SlackPhp\Framework\{Context, Listener};
+use SlackPhp\Framework\Context;
 use SlackPhp\Framework\Contexts\PayloadType;
+use SlackPhp\Framework\Listener;
 
 /**
  * Simple listener that displays/logs a "Work in progress" message in whichever medium makes the most sense.
@@ -35,7 +36,7 @@ class WIP implements Listener
             $context->logger()->debug($message);
         }
 
-        if (!$context->isAcknowledged()) {
+        if (! $context->isAcknowledged()) {
             $context->ack();
         }
     }

@@ -16,9 +16,6 @@ class InputState implements JsonSerializable
 
     /**
      * Creates the InputState by extracting the data from the Context.
-     *
-     * @param Context $context
-     * @return self
      */
     public static function fromContext(Context $context): self
     {
@@ -44,6 +41,7 @@ class InputState implements JsonSerializable
 
             if (isset($elem['selected_options'])) {
                 $data[$blockId] = array_column($elem['selected_options'], 'value');
+
                 continue;
             }
 

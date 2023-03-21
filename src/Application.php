@@ -12,6 +12,7 @@ namespace SlackPhp\Framework;
 class Application implements Listener
 {
     protected Listener $listener;
+
     protected AppConfig $config;
 
     public function __construct(?Listener $listener = null, ?AppConfig $config = null)
@@ -29,7 +30,7 @@ class Application implements Listener
     {
         $context->withAppConfig($this->config);
         $this->listener->handle($context);
-        if (!$context->isAcknowledged()) {
+        if (! $context->isAcknowledged()) {
             $context->ack();
         }
     }

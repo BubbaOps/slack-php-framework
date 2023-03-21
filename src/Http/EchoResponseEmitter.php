@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace SlackPhp\Framework\Http;
 
-use Psr\Http\Message\ResponseInterface;
-
 use function header;
 use function headers_sent;
 use function ob_get_length;
 use function ob_get_level;
+use Psr\Http\Message\ResponseInterface;
 use function sprintf;
 use function ucwords;
 
@@ -28,7 +27,6 @@ class EchoResponseEmitter implements ResponseEmitter
      * Emits the status line and headers via the header() function, and the
      * body content via the output buffer.
      *
-     * @param ResponseInterface $response
      * @throws HttpException if emitting the response fails.
      */
     public function emit(ResponseInterface $response): void
@@ -68,19 +66,17 @@ class EchoResponseEmitter implements ResponseEmitter
      * It is important to mention that this method should be called after
      * `emitHeaders()` in order to prevent PHP from changing the status code of
      * the emitted response.
-     *
-     * @param ResponseInterface $response
      */
     private function emitStatusLine(ResponseInterface $response): void
     {
         $reasonPhrase = $response->getReasonPhrase();
-        $statusCode   = $response->getStatusCode();
+        $statusCode = $response->getStatusCode();
 
         header(sprintf(
             'HTTP/%s %d%s',
             $response->getProtocolVersion(),
             $statusCode,
-            ($reasonPhrase ? ' ' . $reasonPhrase : '')
+            ($reasonPhrase ? ' '.$reasonPhrase : '')
         ), true, $statusCode);
     }
 
@@ -91,15 +87,13 @@ class EchoResponseEmitter implements ResponseEmitter
      * is an array with multiple values, ensures that each is sent
      * in such a way as to create aggregate headers (instead of replace
      * the previous).
-     *
-     * @param ResponseInterface $response
      */
     private function emitHeaders(ResponseInterface $response): void
     {
         $statusCode = $response->getStatusCode();
 
         foreach ($response->getHeaders() as $header => $values) {
-            $name  = ucwords($header, '-');
+            $name = ucwords($header, '-');
             $first = $name === 'Set-Cookie' ? false : true;
             foreach ($values as $value) {
                 header(sprintf(

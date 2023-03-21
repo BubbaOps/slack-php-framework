@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace SlackPhp\Framework\Listeners;
 
-use SlackPhp\Framework\{Context, Interceptor, Listener};
+use SlackPhp\Framework\Context;
+use SlackPhp\Framework\Interceptor;
+use SlackPhp\Framework\Listener;
 
 class Intercepted implements Listener
 {
     private Interceptor $interceptor;
+
     private Listener $listener;
 
-    /**
-     * @param Interceptor $interceptor
-     * @param Listener $listener
-     */
     public function __construct(Interceptor $interceptor, Listener $listener)
     {
         $this->interceptor = $interceptor;

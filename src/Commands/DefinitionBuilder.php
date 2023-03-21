@@ -9,7 +9,9 @@ use SlackPhp\Framework\Exception;
 class DefinitionBuilder
 {
     private ?string $name;
+
     private ?string $subCommand;
+
     private string $description = '';
 
     /** @var ArgDefinition[] */

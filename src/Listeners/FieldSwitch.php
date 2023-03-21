@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace SlackPhp\Framework\Listeners;
 
 use Closure;
-use SlackPhp\Framework\{Coerce, Context, Listener};
+use SlackPhp\Framework\Coerce;
+use SlackPhp\Framework\Context;
+use SlackPhp\Framework\Listener;
 
 class FieldSwitch implements Listener
 {
@@ -13,6 +15,7 @@ class FieldSwitch implements Listener
     private array $cases;
 
     private ?Listener $default;
+
     private string $field;
 
     public function __construct(string $field, array $cases, $default = null)

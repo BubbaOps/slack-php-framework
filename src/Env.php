@@ -10,16 +10,27 @@ use function strtoupper;
 final class Env
 {
     private const DEFAULT_PREFIX = 'SLACK';
+
     private const APP_TOKEN = 'APP_TOKEN';
+
     private const APP_ID = 'APP_ID';
+
     private const BOT_TOKEN = 'BOT_TOKEN';
+
     private const CLIENT_ID = 'CLIENT_ID';
+
     private const CLIENT_SECRET = 'CLIENT_SECRET';
+
     private const FIVE_MINUTES = 60 * 5;
+
     private const MAX_CLOCK_SKEW = 'MAX_CLOCK_SKEW';
+
     private const SCOPES = 'SCOPES';
+
     private const SIGNING_KEY = 'SIGNING_KEY';
+
     private const SKIP_AUTH = 'SKIP_AUTH';
+
     private const STATE_SECRET = 'STATE_SECRET';
 
     /** @var array<string, self> */
@@ -30,7 +41,6 @@ final class Env
     /**
      * Returns an instance of Env for the given prefix (default: SLACK)
      *
-     * @param string|null $prefix
      * @return static
      */
     public static function vars(?string $prefix = null): self
@@ -47,8 +57,6 @@ final class Env
 
     /**
      * Gets the "app token" from the environment, which the app uses to establish a connection in Socket Mode.
-     *
-     * @return string|null
      */
     public function getAppToken(): ?string
     {
@@ -57,8 +65,6 @@ final class Env
 
     /**
      * Gets the app ID from the environment, which the app uses to identify itself.
-     *
-     * @return string|null
      */
     public function getAppId(): ?string
     {
@@ -67,8 +73,6 @@ final class Env
 
     /**
      * Gets the "bot token" from the environment, which the app uses to call Slack APIs for the default workspace.
-     *
-     * @return string|null
      */
     public function getBotToken(): ?string
     {
@@ -77,8 +81,6 @@ final class Env
 
     /**
      * Gets the client ID from the environment, which the app uses in the OAuth flow when installed to a workspace.
-     *
-     * @return string|null
      */
     public function getClientId(): ?string
     {
@@ -87,8 +89,6 @@ final class Env
 
     /**
      * Gets the client secret from the environment, which the app uses in the OAuth flow when installed to a workspace.
-     *
-     * @return string|null
      */
     public function getClientSecret(): ?string
     {
@@ -97,8 +97,6 @@ final class Env
 
     /**
      * Gets the scopes from the environment, which the app uses in the OAuth flow when installed to a workspace.
-     *
-     * @return array
      */
     public function getScopes(): array
     {
@@ -109,8 +107,6 @@ final class Env
 
     /**
      * Gets the signing key from the environment, which the app uses to validate incoming requests.
-     *
-     * @return string|null
      */
     public function getSigningKey(): ?string
     {
@@ -119,8 +115,6 @@ final class Env
 
     /**
      * Gets the state secret from the environment, which the app uses in the OAuth flow when installed to a workspace.
-     *
-     * @return string|null
      */
     public function getStateSecret(): ?string
     {
@@ -129,9 +123,6 @@ final class Env
 
     /**
      * Gets an environment variable value by its name.
-     *
-     * @param string $key
-     * @return string|null
      */
     public function get(string $key): ?string
     {
@@ -142,8 +133,6 @@ final class Env
 
     /**
      * Gets the maximum allowed clock skew from the environment, which the app uses to validate incoming requests.
-     *
-     * @return int
      */
     public static function getMaxClockSkew(): int
     {
@@ -154,8 +143,6 @@ final class Env
 
     /**
      * Gets the skip auth flag from the environment, which the app uses to determine whether to bypass authentication.
-     *
-     * @return bool
      */
     public static function getSkipAuth(): bool
     {

@@ -17,10 +17,12 @@ interface ApiClient
      * app in order to be used. For required scopes, parameters, and other details for any operation, you can refer to
      * Slack's API documentation: https://api.slack.com/methods.
      *
-     * @param string $api Name of the API (e.g., `chat.postMessage`).
-     * @param array<string, mixed> $params Associative array of input parameters.
+     * @param  string  $api Name of the API (e.g., `chat.postMessage`).
+     * @param  array<string, mixed>  $params Associative array of input parameters.
      * @return array<string, mixed> JSON-decoded response data.
+     *
      * @throws Exception If the API call is not successful.
+     *
      * @see https://api.slack.com/methods
      */
     public function call(string $api, array $params): array;

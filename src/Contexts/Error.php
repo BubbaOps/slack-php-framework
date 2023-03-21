@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace SlackPhp\Framework\Contexts;
 
-use SlackPhp\Framework\{Context, Exception};
+use SlackPhp\Framework\Context;
+use SlackPhp\Framework\Exception;
 use Throwable;
 
 /**
@@ -13,8 +14,11 @@ use Throwable;
 class Error
 {
     private Context $context;
+
     private Throwable $exception;
+
     private array $additionalContext;
+
     private string $explanation;
 
     public function __construct(Context $context, Throwable $exception)
@@ -28,7 +32,6 @@ class Error
     /**
      * Adds a human-readable explanation of the error that's safe to provide to the application user.
      *
-     * @param string $explanation
      * @return $this
      */
     public function addExplanation(string $explanation): self
@@ -41,7 +44,6 @@ class Error
     /**
      * Adds additional context to the error that will be included in the logs.
      *
-     * @param array $additionalContext
      * @return $this
      */
     public function addAdditionalContext(array $additionalContext): self

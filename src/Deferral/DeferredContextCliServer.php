@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace SlackPhp\Framework\Deferral;
 
 use Closure;
-use SlackPhp\Framework\{AppServer, Context, Exception};
+use SlackPhp\Framework\AppServer;
+use SlackPhp\Framework\Context;
+use SlackPhp\Framework\Exception;
 use Throwable;
 
 /**
@@ -15,11 +17,13 @@ class DeferredContextCliServer extends AppServer
 {
     /** @var string[] */
     private array $args;
+
     private ?Closure $deserializeCallback;
+
     private int $exitCode = 0;
 
     /**
-     * @param string[] $args
+     * @param  string[]  $args
      * @return $this
      */
     public function withArgs(array $args): self
@@ -30,7 +34,7 @@ class DeferredContextCliServer extends AppServer
     }
 
     /**
-     * @param callable(string): Context $deserializeCallback
+     * @param  callable(string): Context  $deserializeCallback
      * @return $this
      */
     public function withDeserializeCallback(callable $deserializeCallback): self
@@ -64,7 +68,7 @@ class DeferredContextCliServer extends AppServer
             $this->exitCode = 1;
         }
 
-        if (!$softExit) {
+        if (! $softExit) {
             $this->stop();
         }
     }
@@ -90,7 +94,7 @@ class DeferredContextCliServer extends AppServer
             }
 
             $context = Context::fromArray($data);
-            if (!($context->isAcknowledged() && $context->isDeferred())) {
+            if (! ($context->isAcknowledged() && $context->isDeferred())) {
                 throw new Exception('Context was not deferred');
             }
 

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace SlackPhp\Framework\Deferral;
 
-use SlackPhp\Framework\{Context, Deferrer, Listener};
+use SlackPhp\Framework\Context;
+use SlackPhp\Framework\Deferrer;
+use SlackPhp\Framework\Listener;
 
 /**
  * A synchronous implementation of Deferrer, that does the additional processing prior to the "ack" HTTP response.
@@ -18,9 +20,6 @@ class PreAckDeferrer implements Deferrer
 {
     private Listener $listener;
 
-    /**
-     * @param Listener $listener
-     */
     public function __construct(Listener $listener)
     {
         $this->listener = $listener;

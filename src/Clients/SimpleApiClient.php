@@ -133,11 +133,11 @@ class SimpleApiClient implements ApiClient
 
     public function call(string $api, array $params): array
     {
-        if (!isset($params['token']) && isset($this->apiToken)) {
+        if (! isset($params['token']) && isset($this->apiToken)) {
             $params['token'] = $this->apiToken;
         }
 
-        $url = self::BASE_API . $api;
+        $url = self::BASE_API.$api;
 
         return in_array($api, self::SUPPORTS_JSON, true)
             ? $this->sendJsonRequest('POST', $url, $params)

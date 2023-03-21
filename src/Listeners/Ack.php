@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace SlackPhp\Framework\Listeners;
 
 use SlackPhp\BlockKit\Surfaces\Message;
-use SlackPhp\Framework\{Coerce, Context, Listener};
+use SlackPhp\Framework\Coerce;
+use SlackPhp\Framework\Context;
+use SlackPhp\Framework\Listener;
 
 /**
  * Simple listener that merely acks.
@@ -17,7 +19,7 @@ class Ack implements Listener
     private ?Message $message;
 
     /**
-     * @param Message|array|string|null $message Message to include in ack (for commands).
+     * @param  Message|array|string|null  $message Message to include in ack (for commands).
      */
     public function __construct($message = null)
     {

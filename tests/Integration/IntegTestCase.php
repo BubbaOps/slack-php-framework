@@ -2,8 +2,6 @@
 
 namespace SlackPhp\Framework\Tests\Integration;
 
-use SlackPhp\Framework\Context;
-
 use Nyholm\Psr7\Factory\Psr17Factory;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -13,6 +11,7 @@ use Psr\Log\LoggerInterface;
 use SlackPhp\BlockKit\Surfaces\Message;
 use SlackPhp\Framework\Clients\ApiClient;
 use SlackPhp\Framework\Clients\RespondClient;
+use SlackPhp\Framework\Context;
 use SlackPhp\Framework\Contexts\DataBag;
 use SlackPhp\Framework\Http\HttpServer;
 use SlackPhp\Framework\Interceptor;
@@ -22,19 +21,24 @@ use SlackPhp\Framework\Tests\Fakes\FakeResponseEmitter;
 class IntegTestCase extends TestCase
 {
     private const SIGNING_KEY = 'abc123';
+
     private const BOT_TOKEN = 'xoxb-abc123';
+
     private const HEADER_SIGNATURE = 'X-Slack-Signature';
+
     private const HEADER_TIMESTAMP = 'X-Slack-Request-Timestamp';
 
     protected Psr17Factory $httpFactory;
+
     /** @var LoggerInterface|MockObject */
     protected $logger;
+
     private FakeResponseEmitter $responseEmitter;
 
     public function setUp(): void
     {
-        putenv('SLACK_SIGNING_KEY=' . self::SIGNING_KEY);
-        putenv('SLACK_BOT_TOKEN=' . self::BOT_TOKEN);
+        putenv('SLACK_SIGNING_KEY='.self::SIGNING_KEY);
+        putenv('SLACK_BOT_TOKEN='.self::BOT_TOKEN);
 
         parent::setUp();
         $this->httpFactory = new Psr17Factory();
@@ -54,7 +58,7 @@ class IntegTestCase extends TestCase
         try {
             return new DataBag(\json_decode($content, true, 512, \JSON_THROW_ON_ERROR));
         } catch (\JsonException $exception) {
-            $this->fail('Could not parse response JSON: ' . $exception->getMessage());
+            $this->fail('Could not parse response JSON: '.$exception->getMessage());
         }
     }
 
@@ -82,7 +86,7 @@ class IntegTestCase extends TestCase
         // Create signature
         $timestamp = $timestamp ?? time();
         $stringToSign = sprintf('v0:%d:%s', $timestamp, $content);
-        $signature = 'v0=' . hash_hmac('sha256', $stringToSign, self::SIGNING_KEY);
+        $signature = 'v0='.hash_hmac('sha256', $stringToSign, self::SIGNING_KEY);
 
         return $this->httpFactory->createServerRequest('POST', '/')
             ->withHeader(self::HEADER_TIMESTAMP, (string) $timestamp)
@@ -113,11 +117,11 @@ class IntegTestCase extends TestCase
     }
 
     /**
-     * @param mixed $result
+     * @param  mixed  $result
      */
     protected function assertIsAck($result): void
     {
-        if (!$result instanceof DataBag) {
+        if (! $result instanceof DataBag) {
             $this->fail('Tried to assertIsAck on invalid value');
         }
 

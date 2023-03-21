@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace SlackPhp\Framework\Commands;
 
-use SlackPhp\Framework\{Context, Listener};
+use SlackPhp\Framework\Context;
+use SlackPhp\Framework\Listener;
 
 abstract class CommandListener implements Listener
 {
@@ -15,7 +16,7 @@ abstract class CommandListener implements Listener
 
     public static function getDefinition(): Definition
     {
-        if (!isset(self::$definitions[static::class])) {
+        if (! isset(self::$definitions[static::class])) {
             self::$definitions[static::class] = static::buildDefinition(new DefinitionBuilder())->build();
         }
 

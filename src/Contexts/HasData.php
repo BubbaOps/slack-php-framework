@@ -8,13 +8,13 @@ use SlackPhp\Framework\Exception;
 
 trait HasData
 {
-    /** @var array<string, mixed>  */
+    /** @var array<string, mixed> */
     protected array $data = [];
 
     /**
      * This constructor can (and likely should be) be overridden by trait users.
      *
-     * @param array<string, mixed> $data
+     * @param  array<string, mixed>  $data
      */
     public function __construct(array $data = [])
     {
@@ -35,8 +35,8 @@ trait HasData
     /**
      * Get a value from the data.
      *
-     * @param string $key Key or dot-separated path to value in data.
-     * @param bool $required Whether to throw an exception if the value is not set.
+     * @param  string  $key Key or dot-separated path to value in data.
+     * @param  bool  $required Whether to throw an exception if the value is not set.
      * @return mixed
      */
     public function get(string $key, bool $required = false)
@@ -51,8 +51,8 @@ trait HasData
     }
 
     /**
-     * @param string[] $keys
-     * @param bool $required Whether to throw an exception if none of the values are set.
+     * @param  string[]  $keys
+     * @param  bool  $required Whether to throw an exception if none of the values are set.
      * @return mixed
      */
     public function getOneOf(array $keys, bool $required = false)
@@ -75,8 +75,8 @@ trait HasData
     }
 
     /**
-     * @param string[] $keys
-     * @param bool $required Whether to throw an exception if any of the values are set.
+     * @param  string[]  $keys
+     * @param  bool  $required Whether to throw an exception if any of the values are set.
      * @return array<string, mixed>
      */
     public function getAllOf(array $keys, bool $required = false): array
@@ -92,7 +92,7 @@ trait HasData
             }
         }
 
-        if ($required && !empty($missing)) {
+        if ($required && ! empty($missing)) {
             $class = static::class;
             $list = implode(', ', array_map(fn (string $key) => "\"{$key}\"", $missing));
 
@@ -103,8 +103,6 @@ trait HasData
     }
 
     /**
-     * @param array $keys
-     * @param array $data
      * @return mixed
      */
     private function getDeep(array $keys, array &$data)
@@ -122,7 +120,7 @@ trait HasData
         }
 
         // If there is nothing to recurse into, don't recurse.
-        if (!is_array($value)) {
+        if (! is_array($value)) {
             return null;
         }
 
@@ -134,8 +132,6 @@ trait HasData
      * Get all data as an associative array.
      *
      * Scrubs any sensitive keys.
-     *
-     * @return array
      */
     public function toArray(): array
     {

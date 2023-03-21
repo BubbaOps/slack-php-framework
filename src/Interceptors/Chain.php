@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace SlackPhp\Framework\Interceptors;
 
-use SlackPhp\Framework\{Context, Interceptor, Listener};
+use SlackPhp\Framework\Context;
+use SlackPhp\Framework\Interceptor;
+use SlackPhp\Framework\Listener;
 use SlackPhp\Framework\Listeners\Intercepted;
 
 class Chain implements Interceptor
@@ -18,7 +20,7 @@ class Chain implements Interceptor
     }
 
     /**
-     * @param Interceptor[] $interceptors
+     * @param  Interceptor[]  $interceptors
      */
     public function __construct(array $interceptors = [])
     {

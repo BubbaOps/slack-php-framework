@@ -8,7 +8,6 @@ use SlackPhp\Framework\Exception;
 
 class OAuthLink
 {
-    /** @var string */
     private string $clientId;
 
     /** @var string[] */
@@ -17,7 +16,6 @@ class OAuthLink
     /** @var string[] */
     private array $userScopes;
 
-    /** @var string */
     private string $state;
 
     /** @var string */
@@ -70,7 +68,7 @@ class OAuthLink
 
     public function createUrl(): string
     {
-        if (!isset($this->clientId)) {
+        if (! isset($this->clientId)) {
             throw new Exception('Must provide client ID');
         }
 
@@ -86,7 +84,7 @@ class OAuthLink
             'redirect_uri' => $this->redirectUri,
         ]));
 
-        return 'https://slack.com/oauth/v2/authorize?' . $query;
+        return 'https://slack.com/oauth/v2/authorize?'.$query;
     }
 
     public function createLink(): string

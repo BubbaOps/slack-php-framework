@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace SlackPhp\Framework\Interceptors\Filters;
 
 use Closure;
-use SlackPhp\Framework\{Context, Listener};
+use SlackPhp\Framework\Context;
 use SlackPhp\Framework\Interceptors\Filter;
+use SlackPhp\Framework\Listener;
 
 class CallbackFilter extends Filter
 {
@@ -14,8 +15,7 @@ class CallbackFilter extends Filter
     private $filterFn;
 
     /**
-     * @param callable $filterFn
-     * @param Listener|callable|string|null $defaultListener
+     * @param  Listener|callable|string|null  $defaultListener
      */
     public function __construct(callable $filterFn, $defaultListener = null)
     {

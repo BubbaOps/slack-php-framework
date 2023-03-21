@@ -6,9 +6,14 @@ namespace SlackPhp\Framework;
 
 use Closure;
 use Psr\Container\ContainerInterface;
-use Psr\Log\{LoggerInterface, NullLogger};
-use SlackPhp\Framework\Auth\{AppCredentials, SingleTeamTokenStore, TokenStore};
-use SlackPhp\BlockKit\Surfaces\{AppHome, Message, Modal};
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
+use SlackPhp\BlockKit\Surfaces\AppHome;
+use SlackPhp\BlockKit\Surfaces\Message;
+use SlackPhp\BlockKit\Surfaces\Modal;
+use SlackPhp\Framework\Auth\AppCredentials;
+use SlackPhp\Framework\Auth\SingleTeamTokenStore;
+use SlackPhp\Framework\Auth\TokenStore;
 use SlackPhp\Framework\Contexts\ClassContainer;
 
 /**
@@ -17,22 +22,38 @@ use SlackPhp\Framework\Contexts\ClassContainer;
 class AppConfig
 {
     private ?string $alias;
+
     private ?AppCredentials $appCredentials;
+
     private ?string $appToken;
+
     private ?string $botToken;
+
     private ?string $clientId;
+
     private ?string $clientSecret;
+
     private ?ContainerInterface $container;
+
     private ?Env $env;
+
     private Closure $errorAppHomeFactory;
+
     private Closure $errorMessageFactory;
+
     private Closure $errorModalFactory;
+
     private ?string $id;
+
     private ?SlackLogger $logger;
+
     /** @var string[]|null */
     private ?array $scopes;
+
     private ?string $signingKey;
+
     private ?string $stateSecret;
+
     private ?TokenStore $tokenStore;
 
     /**
@@ -40,7 +61,6 @@ class AppConfig
      *
      * The default is "SLACK", but setting an app-specific one may be necessary for multi-tenant apps.
      *
-     * @param string $prefix
      * @return $this
      */
     public function withEnvPrefix(string $prefix): self
@@ -50,9 +70,6 @@ class AppConfig
         return $this;
     }
 
-    /**
-     * @return Env
-     */
     public function getEnv(): Env
     {
         return $this->env ??= Env::vars();
@@ -64,7 +81,6 @@ class AppConfig
      * Typically not required, as it will either be set for you or not required. You can set this explicitly to a) make
      * sure it gets included in log messages, and b) make sure the app validates that incoming requests match IDs.
      *
-     * @param string $id
      * @return $this
      */
     public function withId(string $id): self
@@ -75,9 +91,6 @@ class AppConfig
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getId(): ?string
     {
         return $this->id ??= $this->getEnv()->getAppId();
@@ -86,7 +99,6 @@ class AppConfig
     /**
      * Sets a human-readable app alias to be used in log messages.
      *
-     * @param string $alias
      * @return $this
      */
     public function withAlias(string $alias): self
@@ -99,9 +111,6 @@ class AppConfig
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getAlias(): ?string
     {
         return $this->alias ?? null;
@@ -112,7 +121,6 @@ class AppConfig
      *
      * The PSR-3 logger gets wrapped by a custom logger implementation that adds additional context to messages.
      *
-     * @param LoggerInterface $logger
      * @return $this
      */
     public function withLogger(LoggerInterface $logger): self
@@ -127,21 +135,15 @@ class AppConfig
         return $this;
     }
 
-    /**
-     * @return SlackLogger
-     */
     public function getLogger(): SlackLogger
     {
-        if (!isset($this->logger)) {
+        if (! isset($this->logger)) {
             $this->withLogger(new NullLogger());
         }
 
         return $this->logger;
     }
 
-    /**
-     * @return bool
-     */
     public function hasLogger(): bool
     {
         return isset($this->logger);
@@ -154,7 +156,6 @@ class AppConfig
      * to be configured/resolved. The container is also accessible to the Context, if you need to use it as a "service
      * locator" as well (possible, but discouraged).
      *
-     * @param ContainerInterface $container
      * @return $this
      */
     public function withContainer(ContainerInterface $container): self
@@ -164,9 +165,6 @@ class AppConfig
         return $this;
     }
 
-    /**
-     * @return ContainerInterface
-     */
     public function getContainer(): ContainerInterface
     {
         return $this->container ??= new ClassContainer();
@@ -178,7 +176,6 @@ class AppConfig
      * A TokenStore is needed when an app is distributed to more than one team (aka workspace) or enterprise org. In
      * other words, when more than one API token can be used, the Token Store is what provides it.
      *
-     * @param TokenStore $tokenStore
      * @return $this
      */
     public function withTokenStore(TokenStore $tokenStore): self
@@ -188,12 +185,9 @@ class AppConfig
         return $this;
     }
 
-    /**
-     * @return TokenStore
-     */
     public function getTokenStore(): TokenStore
     {
-        if (!isset($this->tokenStore)) {
+        if (! isset($this->tokenStore)) {
             $appCredentials = $this->getAppCredentials();
             $botToken = $appCredentials->supportsApiAuth()
                 ? $appCredentials->getDefaultBotToken()
@@ -210,7 +204,6 @@ class AppConfig
      *
      * You can also set this via the environment variable: SLACK_BOT_TOKEN.
      *
-     * @param string $botToken
      * @return $this
      */
     public function withBotToken(string $botToken): self
@@ -220,9 +213,6 @@ class AppConfig
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getBotToken(): ?string
     {
         return $this->botToken ??= $this->getEnv()->getBotToken();
@@ -233,7 +223,6 @@ class AppConfig
      *
      * You can also set this via the environment variable: SLACK_SIGNING_KEY.
      *
-     * @param string $signingKey
      * @return $this
      */
     public function withSigningKey(string $signingKey): self
@@ -243,9 +232,6 @@ class AppConfig
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSigningKey(): ?string
     {
         return $this->signingKey ??= $this->getEnv()->getSigningKey();
@@ -256,7 +242,6 @@ class AppConfig
      *
      * You can also set this via the environment variable: SLACK_CLIENT_ID.
      *
-     * @param string $clientId
      * @return $this
      */
     public function withClientId(string $clientId): self
@@ -266,9 +251,6 @@ class AppConfig
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getClientId(): ?string
     {
         return $this->clientId ??= $this->getEnv()->getClientId();
@@ -279,7 +261,6 @@ class AppConfig
      *
      * You can also set this via the environment variable: SLACK_CLIENT_SECRET.
      *
-     * @param string $clientSecret
      * @return $this
      */
     public function withClientSecret(string $clientSecret): self
@@ -289,9 +270,6 @@ class AppConfig
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getClientSecret(): ?string
     {
         return $this->clientSecret ?? $this->getEnv()->getClientSecret();
@@ -304,7 +282,6 @@ class AppConfig
      * by the app when Slack redirects the user back to the app. You can also set this via the environment
      * variable: SLACK_STATE_SECRET.
      *
-     * @param string $stateSecret
      * @return $this
      */
     public function withStateSecret(string $stateSecret): self
@@ -314,9 +291,6 @@ class AppConfig
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getStateSecret(): ?string
     {
         return $this->stateSecret ?? $this->getEnv()->getStateSecret();
@@ -325,7 +299,7 @@ class AppConfig
     /**
      * Sets the required scopes needed for the app. These are needed for the OAuth flow to set up app permissions.
      *
-     * @param string[] $scopes
+     * @param  string[]  $scopes
      * @return $this
      */
     public function withScopes(array $scopes): self
@@ -348,7 +322,6 @@ class AppConfig
      *
      * These credentials are an encapsulation of all the various app-specific keys and secrets needed for auth.
      *
-     * @param AppCredentials $appCredentials
      * @return $this
      */
     public function withAppCredentials(AppCredentials $appCredentials): self
@@ -358,9 +331,6 @@ class AppConfig
         return $this;
     }
 
-    /**
-     * @return AppCredentials
-     */
     public function getAppCredentials(): AppCredentials
     {
         return $this->appCredentials ??= new AppCredentials(
@@ -376,7 +346,6 @@ class AppConfig
     /**
      * Explicitly sets the app token to use for Socket Mode auth.
      *
-     * @param string $appToken
      * @return $this
      */
     public function withAppToken(string $appToken): self
@@ -386,9 +355,6 @@ class AppConfig
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getAppToken(): ?string
     {
         return $this->appToken ?? $this->getEnv()->getAppToken();
@@ -397,7 +363,7 @@ class AppConfig
     /**
      * Sets the callback for generating the error message when using `$context->error($ex)->message()`.
      *
-     * @param callable(string): Message $factoryFn
+     * @param  callable(string): Message  $factoryFn
      * @return $this
      */
     public function withErrorMessageFactory(callable $factoryFn): self
@@ -423,7 +389,7 @@ class AppConfig
     /**
      * Sets the callback for generating the error modal when using `$context->error($ex)->modal()`.
      *
-     * @param callable(string): Modal $factoryFn
+     * @param  callable(string): Modal  $factoryFn
      * @return $this
      */
     public function withErrorModalFactory(callable $factoryFn): self
@@ -450,7 +416,7 @@ class AppConfig
     /**
      * Sets the callback for generating the error modal when using `$context->error($ex)->appHome()`.
      *
-     * @param callable(string): AppHome $factoryFn
+     * @param  callable(string): AppHome  $factoryFn
      * @return $this
      */
     public function withErrorAppHomeFactory(callable $factoryFn): self

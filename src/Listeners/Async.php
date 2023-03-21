@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace SlackPhp\Framework\Listeners;
 
-use SlackPhp\Framework\{Context, Listener};
+use SlackPhp\Framework\Context;
+use SlackPhp\Framework\Listener;
 
 /**
  * Wraps listener(s) for async/deferred execution.
@@ -15,12 +16,9 @@ use SlackPhp\Framework\{Context, Listener};
 class Async extends Base
 {
     private Listener $asyncListener;
+
     private ?Listener $syncListener;
 
-    /**
-     * @param Listener $asyncListener
-     * @param Listener|null $syncListener
-     */
     public function __construct(Listener $asyncListener, ?Listener $syncListener = null)
     {
         $this->asyncListener = $asyncListener;

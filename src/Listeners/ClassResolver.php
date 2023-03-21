@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace SlackPhp\Framework\Listeners;
 
-use SlackPhp\Framework\{Context, Exception, Listener};
+use SlackPhp\Framework\Context;
+use SlackPhp\Framework\Exception;
+use SlackPhp\Framework\Listener;
 use Throwable;
 
 class ClassResolver implements Listener
 {
     private string $class;
 
-    /**
-     * @param string $class
-     */
     public function __construct(string $class)
     {
         $this->class = $class;
@@ -27,7 +26,7 @@ class ClassResolver implements Listener
             throw new Exception('Could not resolve class name to Listener', 0, $ex);
         }
 
-        if (!$listener instanceof Listener) {
+        if (! $listener instanceof Listener) {
             throw new Exception('Resolved class name to a non-Listener');
         }
 

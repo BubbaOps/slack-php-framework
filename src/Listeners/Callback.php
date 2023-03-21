@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace SlackPhp\Framework\Listeners;
 
 use Closure;
-use SlackPhp\Framework\{Context, Exception, Listener};
-
 use function is_string;
 use function realpath;
+use SlackPhp\Framework\Context;
+use SlackPhp\Framework\Exception;
+use SlackPhp\Framework\Listener;
 
 /**
  * Listener that has its logic provided as a callback function.
@@ -19,21 +20,18 @@ class Callback implements Listener
 
     /**
      * Creates a Callback Listener that includes a file and attempts to treat the returned value as a listener.
-     *
-     * @param string $path
-     * @return self
      */
     public static function forInclude(string $path): self
     {
         return new self(function (Context $context) use ($path) {
             $realPath = realpath($path);
-            if (!is_string($realPath)) {
+            if (! is_string($realPath)) {
                 throw new Exception("Invalid listener path: {$path}");
             }
 
             /** @noinspection PhpIncludeInspection */
             $listener = require $realPath;
-            if (!$listener instanceof Listener) {
+            if (! $listener instanceof Listener) {
                 throw new Exception("No listener returned from path: {$path}");
             }
 
@@ -42,7 +40,7 @@ class Callback implements Listener
     }
 
     /**
-     * @param callable(Context): void $callback Callback to be used as the Listener.
+     * @param  callable(Context): void  $callback Callback to be used as the Listener.
      */
     public function __construct(callable $callback)
     {

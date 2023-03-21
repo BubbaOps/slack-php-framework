@@ -4,30 +4,27 @@ declare(strict_types=1);
 
 namespace SlackPhp\Framework;
 
-use Psr\Log\{AbstractLogger, LoggerInterface, NullLogger};
+use Psr\Log\AbstractLogger;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 
 class SlackLogger extends AbstractLogger
 {
     private array $context;
+
     private LoggerInterface $logger;
+
     private string $name;
 
-    /**
-     * @param LoggerInterface|null $logger
-     * @return self
-     */
     public static function wrap(?LoggerInterface $logger): self
     {
-        if (!$logger instanceof self) {
+        if (! $logger instanceof self) {
             $logger = new self($logger);
         }
 
         return $logger;
     }
 
-    /**
-     * @param LoggerInterface|null $logger
-     */
     public function __construct(?LoggerInterface $logger = null)
     {
         $this->logger = $logger ?? new NullLogger();
@@ -60,7 +57,7 @@ class SlackLogger extends AbstractLogger
 
     /**
      * @deprecated use addContext() instead
-     * @param array $context
+     *
      * @return $this
      */
     public function withData(array $context): self

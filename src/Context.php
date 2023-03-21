@@ -4,37 +4,34 @@ declare(strict_types=1);
 
 namespace SlackPhp\Framework;
 
+use function array_filter;
 use ArrayAccess;
 use Closure;
-use JsonException;
-use JsonSerializable;
-use Psr\Container\ContainerInterface;
-use SlackPhp\BlockKit\{Formatter, Kit};
-use SlackPhp\BlockKit\Partials\OptionList;
-use SlackPhp\BlockKit\Surfaces\{AppHome, Message};
-use SlackPhp\Framework\Contexts\{
-    Blocks,
-    Error,
-    HasData,
-    Home,
-    Modals,
-    Payload,
-    PayloadType,
-    View,
-};
-use SlackPhp\Framework\Clients\{
-    ApiClient,
-    RespondClient,
-    SimpleApiClient,
-    SimpleRespondClient,
-};
-use Throwable;
-
-use function array_filter;
 use function implode;
 use function in_array;
 use function is_array;
 use function json_encode;
+use JsonException;
+use JsonSerializable;
+use Psr\Container\ContainerInterface;
+use SlackPhp\BlockKit\Formatter;
+use SlackPhp\BlockKit\Kit;
+use SlackPhp\BlockKit\Partials\OptionList;
+use SlackPhp\BlockKit\Surfaces\AppHome;
+use SlackPhp\BlockKit\Surfaces\Message;
+use SlackPhp\Framework\Clients\ApiClient;
+use SlackPhp\Framework\Clients\RespondClient;
+use SlackPhp\Framework\Clients\SimpleApiClient;
+use SlackPhp\Framework\Clients\SimpleRespondClient;
+use SlackPhp\Framework\Contexts\Blocks;
+use SlackPhp\Framework\Contexts\Error;
+use SlackPhp\Framework\Contexts\HasData;
+use SlackPhp\Framework\Contexts\Home;
+use SlackPhp\Framework\Contexts\Modals;
+use SlackPhp\Framework\Contexts\Payload;
+use SlackPhp\Framework\Contexts\PayloadType;
+use SlackPhp\Framework\Contexts\View;
+use Throwable;
 
 /**
  * A Slack "context" provides an interface to all the data and affordances for an incoming Slack request/event.
@@ -46,20 +43,33 @@ class Context implements ArrayAccess, JsonSerializable
     }
 
     private const ACKNOWLEDGED_KEY = '_acknowledged';
+
     private const APP_ID_KEY = '_app';
+
     private const DEFERRED_KEY = '_deferred';
+
     private const PAYLOAD_KEY = '_payload';
+
     private const SPECIAL_KEYS = [self::ACKNOWLEDGED_KEY, self::APP_ID_KEY, self::DEFERRED_KEY, self::PAYLOAD_KEY];
 
     private ?string $ack;
+
     private ?Closure $ackCallback;
+
     private ?ApiClient $apiClient;
+
     private ?string $appId;
+
     private ?Blocks $blocks;
+
     private AppConfig $appConfig;
+
     private bool $isAcknowledged;
+
     private bool $isDeferred;
+
     private Payload $payload;
+
     private ?RespondClient $respondClient;
 
     /**
@@ -67,9 +77,6 @@ class Context implements ArrayAccess, JsonSerializable
      *
      * This is primarily used in asynchronous processors, where an app is processing a request after it's been deferred
      * (e.g., to a queueing system). In this use case, the Context is likely being hydrated from deserialized JSON.
-     *
-     * @param array $data
-     * @return self
      */
     public static function fromArray(array $data): self
     {
@@ -78,10 +85,6 @@ class Context implements ArrayAccess, JsonSerializable
         return new self($payload, $data);
     }
 
-    /**
-     * @param Payload $payload
-     * @param array $data
-     */
     public function __construct(Payload $payload, array $data = [])
     {
         $this->payload = $payload;
@@ -103,7 +106,6 @@ class Context implements ArrayAccess, JsonSerializable
      *
      * Several parts of the context rely on objects/data in the AppConfig.
      *
-     * @param AppConfig $config
      * @return static
      */
     public function withAppConfig(AppConfig $config): self
@@ -127,7 +129,6 @@ class Context implements ArrayAccess, JsonSerializable
      * This is not needed for all server implementations, but if it is, it should be set by the Server implementation,
      * and should not be explicitly provided otherwise.
      *
-     * @param callable $callback
      * @return $this
      */
     public function withAckCallback(callable $callback): self
@@ -142,7 +143,6 @@ class Context implements ArrayAccess, JsonSerializable
      *
      * By default, it uses the PSR-7 HTTP client, and should not need to be explicitly provided.
      *
-     * @param RespondClient $respondClient
      * @return $this
      */
     public function withRespondClient(RespondClient $respondClient): self
@@ -157,7 +157,6 @@ class Context implements ArrayAccess, JsonSerializable
      *
      * By default, it uses built-in implementation, and should not need to be explicitly provided.
      *
-     * @param ApiClient $apiClient
      * @return $this
      */
     public function withApiClient(ApiClient $apiClient): self
@@ -172,8 +171,7 @@ class Context implements ArrayAccess, JsonSerializable
      *
      * Values in the context can be used by any listener or interceptor.
      *
-     * @param string $key
-     * @param mixed $value
+     * @param  mixed  $value
      * @return $this
      */
     public function set(string $key, $value): self
@@ -209,7 +207,7 @@ class Context implements ArrayAccess, JsonSerializable
 
     public function getAppConfig(): AppConfig
     {
-        if (!isset($this->appConfig)) {
+        if (! isset($this->appConfig)) {
             $this->appConfig = new AppConfig();
         }
 
@@ -218,7 +216,7 @@ class Context implements ArrayAccess, JsonSerializable
 
     public function getApiClient(): ApiClient
     {
-        if (!isset($this->apiClient)) {
+        if (! isset($this->apiClient)) {
             $tokenStore = $this->getAppConfig()->getTokenStore();
             $this->apiClient = new SimpleApiClient($tokenStore->get(
                 $this->payload->getTeamId(),
@@ -258,10 +256,12 @@ class Context implements ArrayAccess, JsonSerializable
      * app in order to be used. For required scopes, parameters, and other details for any operation, you can refer to
      * Slack's API documentation: https://api.slack.com/methods.
      *
-     * @param string $api Name of the API (e.g., `chat.postMessage`).
-     * @param array<string, mixed> $params Associative array of input parameters.
+     * @param  string  $api Name of the API (e.g., `chat.postMessage`).
+     * @param  array<string, mixed>  $params Associative array of input parameters.
      * @return array<string, mixed> JSON-decoded output data.
+     *
      * @throws Exception If the API call is not successful.
+     *
      * @see https://api.slack.com/methods
      */
     public function api(string $api, array $params): array
@@ -271,7 +271,7 @@ class Context implements ArrayAccess, JsonSerializable
 
     public function blocks(): Blocks
     {
-        if (!isset($this->blocks)) {
+        if (! isset($this->blocks)) {
             $this->blocks = new Blocks();
         }
 
@@ -289,7 +289,8 @@ class Context implements ArrayAccess, JsonSerializable
      * Acks generally have an empty body, but for some payload types, it may be appropriate to send a message (command)
      * or other data (block_suggestion) as part of the ack.
      *
-     * @param Message|JsonSerializable|array|string|callable(): Message|null $ack Message/data to use as the ack body.
+     * @param  Message|JsonSerializable|array|string|callable(): Message|null  $ack Message/data to use as the ack body.
+     *
      * @throws JsonException if non-null ack cannot be JSON encoded.
      */
     public function ack($ack = null): void
@@ -300,7 +301,7 @@ class Context implements ArrayAccess, JsonSerializable
 
         if ($ack !== null) {
             // Convert everything that's not encodable to a Message.
-            if (!(is_array($ack) || $ack instanceof JsonSerializable)) {
+            if (! (is_array($ack) || $ack instanceof JsonSerializable)) {
                 $ack = Coerce::message($ack);
             }
 
@@ -324,8 +325,6 @@ class Context implements ArrayAccess, JsonSerializable
      * additional infrastructure, and is not supported by any default installations of the framework or PHP. By default,
      * handling deferred contexts happens immediately before the initial ack response, so all context handling should
      * take less than 3 seconds.
-     *
-     * @param bool $defer
      */
     public function defer(bool $defer = true): void
     {
@@ -333,8 +332,7 @@ class Context implements ArrayAccess, JsonSerializable
     }
 
     /**
-     * @param Message|array|string|callable(): Message $message
-     * @param string|null $url
+     * @param  Message|array|string|callable(): Message  $message
      */
     public function respond($message, ?string $url = null): void
     {
@@ -343,7 +341,7 @@ class Context implements ArrayAccess, JsonSerializable
             throw new Exception('Cannot respond: Response URL must be available in the payload or explicitly provided');
         }
 
-        if (!isset($this->respondClient)) {
+        if (! isset($this->respondClient)) {
             $this->respondClient = new SimpleRespondClient();
         }
 
@@ -351,9 +349,7 @@ class Context implements ArrayAccess, JsonSerializable
     }
 
     /**
-     * @param Message|array|string|callable(): Message $message
-     * @param string|null $channel
-     * @param string|null $threadTs
+     * @param  Message|array|string|callable(): Message  $message
      */
     public function say($message, ?string $channel = null, ?string $threadTs = null): void
     {
@@ -372,11 +368,11 @@ class Context implements ArrayAccess, JsonSerializable
     }
 
     /**
-     * @param OptionList|array|null $options
+     * @param  OptionList|array|null  $options
      */
     public function options($options): void
     {
-        if (!$this->payload->isType(PayloadType::blockSuggestion())) {
+        if (! $this->payload->isType(PayloadType::blockSuggestion())) {
             throw new Exception('Can only to use `options()` for block_suggestion requests');
         }
 
@@ -388,10 +384,10 @@ class Context implements ArrayAccess, JsonSerializable
     }
 
     /**
-     * @param AppHome|array|string|callable(): AppHome $appHome
-     * @param string|null $userId If null, the value from the current payload will be used.
-     * @param bool $useHashIfAvailable Set to false if you want to overwrite the current app home without a hash check.
-     * @return array
+     * @param  AppHome|array|string|callable(): AppHome  $appHome
+     * @param  string|null  $userId If null, the value from the current payload will be used.
+     * @param  bool  $useHashIfAvailable Set to false if you want to overwrite the current app home without a hash check.
+     *
      * @deprecated Use appHome() and its methods.
      */
     public function home($appHome, ?string $userId = null, bool $useHashIfAvailable = true): array
@@ -411,8 +407,6 @@ class Context implements ArrayAccess, JsonSerializable
 
     /**
      * Perform an operation on the App Home.
-     *
-     * @return Home
      */
     public function appHome(): Home
     {
@@ -421,8 +415,6 @@ class Context implements ArrayAccess, JsonSerializable
 
     /**
      * Perform an operation with modals.
-     *
-     * @return Modals
      */
     public function modals(): Modals
     {
@@ -431,12 +423,10 @@ class Context implements ArrayAccess, JsonSerializable
 
     /**
      * Ack with a response to the current modal.
-     *
-     * @return View
      */
     public function view(): View
     {
-        if (!$this->payload->isType(PayloadType::viewSubmission())) {
+        if (! $this->payload->isType(PayloadType::viewSubmission())) {
             throw new Exception('Can only to use `view()` (response actions) for view_submission requests');
         }
 
@@ -445,9 +435,6 @@ class Context implements ArrayAccess, JsonSerializable
 
     /**
      * Log and display an error to the user.
-     *
-     * @param Throwable $exception
-     * @return Error
      */
     public function error(Throwable $exception): Error
     {

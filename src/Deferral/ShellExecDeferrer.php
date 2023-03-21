@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace SlackPhp\Framework\Deferral;
 
-use Closure;
-use SlackPhp\Framework\{Context, Deferrer, Exception};
-
-use function escapeshellarg;
 use function base64_encode;
+use Closure;
+use function escapeshellarg;
 use function is_dir;
 use function json_encode;
 use function shell_exec;
+use SlackPhp\Framework\Context;
+use SlackPhp\Framework\Deferrer;
+use SlackPhp\Framework\Exception;
 
 /**
  * Defers context processing for async logic by shelling out to an external, background-running script.
@@ -19,18 +20,20 @@ use function shell_exec;
 class ShellExecDeferrer implements Deferrer
 {
     private string $dir;
+
     private string $script;
+
     private ?Closure $serializeCallback;
 
     /**
-     * @param string $dir Directory to `cd` to before running the script.
-     * @param string $script Script to run for processing the deferred context.
+     * @param  string  $dir Directory to `cd` to before running the script.
+     * @param  string  $script Script to run for processing the deferred context.
      */
     public function __construct(string $dir, string $script, ?callable $serializeCallback = null)
     {
         $this->script = $script;
         $this->dir = $dir;
-        if (!is_dir($this->dir)) {
+        if (! is_dir($this->dir)) {
             throw new Exception('Invalid dir for deferrer script');
         }
 

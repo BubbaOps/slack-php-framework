@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace SlackPhp\Framework\Interceptors;
 
 use Closure;
-use SlackPhp\Framework\{Context, Interceptor, Listener};
+use SlackPhp\Framework\Context;
+use SlackPhp\Framework\Interceptor;
+use SlackPhp\Framework\Listener;
 
 /**
  * Interceptor that lets you tap into the context before the listener is executed.

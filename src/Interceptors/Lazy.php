@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace SlackPhp\Framework\Interceptors;
 
 use Closure;
-use SlackPhp\Framework\{Context, Interceptor, Listener};
+use SlackPhp\Framework\Context;
+use SlackPhp\Framework\Interceptor;
+use SlackPhp\Framework\Listener;
 
 /**
  * Lazily creates an interceptor at the time that it needs to be executed.
@@ -15,7 +17,7 @@ class Lazy implements Interceptor
     private Closure $callback;
 
     /**
-     * @param callable(): Interceptor $callback Interceptor factory callback.
+     * @param  callable(): Interceptor  $callback Interceptor factory callback.
      */
     public function __construct(callable $callback)
     {

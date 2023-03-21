@@ -14,8 +14,8 @@ final class Coerce
     /**
      * Coerces a Message-like value to an actual Message surface.
      *
-     * @param Surfaces\Message|array|string|callable(): Surfaces\Message $message
-     * @return Surfaces\Message
+     * @param  Surfaces\Message|array|string|callable(): Surfaces\Message  $message
+     *
      * @internal
      */
     public static function message($message): Surfaces\Message
@@ -38,8 +38,8 @@ final class Coerce
     /**
      * Coerces a Modal-like value to an actual Modal surface.
      *
-     * @param Surfaces\Modal|array|string|callable(): Surfaces\Modal $modal
-     * @return Surfaces\Modal
+     * @param  Surfaces\Modal|array|string|callable(): Surfaces\Modal  $modal
+     *
      * @internal
      */
     public static function modal($modal): Surfaces\Modal
@@ -62,8 +62,8 @@ final class Coerce
     /**
      * Coerces an "App Home"-like value to an actual App Home surface.
      *
-     * @param Surfaces\AppHome|array|string|callable(): Surfaces\AppHome $appHome
-     * @return Surfaces\AppHome
+     * @param  Surfaces\AppHome|array|string|callable(): Surfaces\AppHome  $appHome
+     *
      * @internal
      */
     public static function appHome($appHome): Surfaces\AppHome
@@ -86,8 +86,8 @@ final class Coerce
     /**
      * Coerces a Listener-like value to an actual Listener.
      *
-     * @param Listener|callable(Context): void|class-string $listener
-     * @return Listener
+     * @param  Listener|callable(Context): void|class-string  $listener
+     *
      * @internal
      */
     public static function listener($listener): Listener
@@ -106,8 +106,8 @@ final class Coerce
     /**
      * Coerces an Interceptor-like value to an actual Interceptor.
      *
-     * @param Interceptor|callable(): Interceptor|array $interceptor
-     * @return Interceptor
+     * @param  Interceptor|callable(): Interceptor|array  $interceptor
+     *
      * @internal
      */
     public static function interceptor($interceptor): Interceptor
@@ -126,8 +126,7 @@ final class Coerce
     /**
      * Coerces an Application-like value to an actual Application.
      *
-     * @param Application|Listener|callable(Context): void|class-string $application
-     * @return Application
+     * @param  Application|Listener|callable(Context): void|class-string  $application
      */
     public static function application($application): Application
     {

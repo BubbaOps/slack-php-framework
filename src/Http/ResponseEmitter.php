@@ -12,7 +12,6 @@ use Psr\Http\Message\ResponseInterface;
 interface ResponseEmitter
 {
     /**
-     * @param ResponseInterface $response
      * @throws HttpException if response cannot be emitted.
      */
     public function emit(ResponseInterface $response): void;

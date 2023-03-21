@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace SlackPhp\Framework\Listeners;
 
-use SlackPhp\Framework\{Context, Listener};
+use SlackPhp\Framework\Context;
+use SlackPhp\Framework\Listener;
 
 class Undefined implements Listener
 {

@@ -18,7 +18,9 @@ class Router implements Listener
     private array $listeners;
 
     private ?Listener $commandAck = null;
+
     private Interceptors\Chain $interceptors;
+
     private bool $urlVerificationAdded = false;
 
     /**
@@ -38,7 +40,7 @@ class Router implements Listener
     /**
      * Sets an "ack" message used for async commands to inform the user to wait for the result (e.g., "processing...").
      *
-     * @param JsonSerializable|array|string $ack
+     * @param  JsonSerializable|array|string  $ack
      * @return $this
      */
     public function withCommandAck($ack): self
@@ -55,7 +57,7 @@ class Router implements Listener
      */
     public function withUrlVerification(): self
     {
-        if (!$this->urlVerificationAdded) {
+        if (! $this->urlVerificationAdded) {
             $this->interceptors->add(new Interceptors\UrlVerification(), true);
             $this->urlVerificationAdded = true;
         }
@@ -66,8 +68,7 @@ class Router implements Listener
     /**
      * Configures a listener for an incoming "command" request.
      *
-     * @param string $name
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function command(string $name, $listener): self
@@ -78,8 +79,7 @@ class Router implements Listener
     /**
      * Configures an async listener for an incoming "command" request.
      *
-     * @param string $name
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function commandAsync(string $name, $listener): self
@@ -90,8 +90,7 @@ class Router implements Listener
     /**
      * Configures listeners for an incoming "command" request, based on sub-commands in the text.
      *
-     * @param string $name
-     * @param array<string, Listener|callable|class-string> $subCommands
+     * @param  array<string, Listener|callable|class-string>  $subCommands
      * @return $this
      */
     public function commandGroup(string $name, array $subCommands): self
@@ -102,8 +101,7 @@ class Router implements Listener
     /**
      * Configures async listeners for an incoming "command" request, based on sub-commands in the text.
      *
-     * @param string $name
-     * @param array<string, Listener|callable|class-string> $subCommands
+     * @param  array<string, Listener|callable|class-string>  $subCommands
      * @return $this
      */
     public function commandGroupAsync(string $name, array $subCommands): self
@@ -117,8 +115,7 @@ class Router implements Listener
     /**
      * Configures a listener for an incoming "event" request.
      *
-     * @param string $name
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function event(string $name, $listener): self
@@ -129,8 +126,7 @@ class Router implements Listener
     /**
      * Configures an async listener for an incoming "event" request.
      *
-     * @param string $name
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function eventAsync(string $name, $listener): self
@@ -141,8 +137,7 @@ class Router implements Listener
     /**
      * Configures a listener for an incoming (global) "shortcut" request.
      *
-     * @param string $callbackId
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function globalShortcut(string $callbackId, $listener): self
@@ -153,8 +148,7 @@ class Router implements Listener
     /**
      * Configures an async listener for an incoming (global) "shortcut" request.
      *
-     * @param string $callbackId
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function globalShortcutAsync(string $callbackId, $listener): self
@@ -165,8 +159,7 @@ class Router implements Listener
     /**
      * Configures a listener for an incoming "message_action" (aka message shortcut) request.
      *
-     * @param string $callbackId
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function messageShortcut(string $callbackId, $listener): self
@@ -177,8 +170,7 @@ class Router implements Listener
     /**
      * Configures an async listener for an incoming "message_action" (aka message shortcut) request.
      *
-     * @param string $callbackId
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function messageShortcutAsync(string $callbackId, $listener): self
@@ -189,8 +181,7 @@ class Router implements Listener
     /**
      * Configures a listener for an incoming "block_actions" request.
      *
-     * @param string $actionId
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function blockAction(string $actionId, $listener): self
@@ -201,8 +192,7 @@ class Router implements Listener
     /**
      * Configures an async listener for an incoming "block_actions" request.
      *
-     * @param string $actionId
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function blockActionAsync(string $actionId, $listener): self
@@ -213,8 +203,7 @@ class Router implements Listener
     /**
      * Configures a listener for an incoming "block_suggestion" request.
      *
-     * @param string $actionId
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function blockSuggestion(string $actionId, $listener): self
@@ -225,8 +214,7 @@ class Router implements Listener
     /**
      * Configures a listener for an incoming "view_submission" request.
      *
-     * @param string $callbackId
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function viewSubmission(string $callbackId, $listener): self
@@ -237,8 +225,7 @@ class Router implements Listener
     /**
      * Configures an async listener for an incoming "view_submission" request.
      *
-     * @param string $callbackId
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function viewSubmissionAsync(string $callbackId, $listener): self
@@ -249,8 +236,7 @@ class Router implements Listener
     /**
      * Configures a listener for an incoming "view_closed" request.
      *
-     * @param string $callbackId
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function viewClosed(string $callbackId, $listener): self
@@ -261,8 +247,7 @@ class Router implements Listener
     /**
      * Configures an async listener for an incoming "view_closed" request.
      *
-     * @param string $callbackId
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function viewClosedAsync(string $callbackId, $listener): self
@@ -273,8 +258,7 @@ class Router implements Listener
     /**
      * Configures a listener for an incoming "workflow_step_edit" request.
      *
-     * @param string $callbackId
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function workflowStepEdit(string $callbackId, $listener): self
@@ -285,8 +269,7 @@ class Router implements Listener
     /**
      * Configures an async listener for an incoming "workflow_step_edit" request.
      *
-     * @param string $callbackId
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function workflowStepEditAsync(string $callbackId, $listener): self
@@ -297,8 +280,8 @@ class Router implements Listener
     /**
      * Configures a listener for an incoming request of the specified type.
      *
-     * @param PayloadType|string $type
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  PayloadType|string  $type
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function on($type, $listener): self
@@ -309,8 +292,8 @@ class Router implements Listener
     /**
      * Configures an async listener for an incoming request of the specified type.
      *
-     * @param PayloadType|string $type
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  PayloadType|string  $type
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function onAsync($type, $listener): self
@@ -321,7 +304,7 @@ class Router implements Listener
     /**
      * Configures a catch-all listener for an incoming request.
      *
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function any($listener): self
@@ -332,7 +315,7 @@ class Router implements Listener
     /**
      * Configures an async catch-all listener for an incoming request.
      *
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function anyAsync($listener): self
@@ -343,7 +326,7 @@ class Router implements Listener
     /**
      * Adds a tap interceptor, which executes a callback with the Context.
      *
-     * @param callable(Context): void $callback
+     * @param  callable(Context): void  $callback
      * @return $this
      */
     public function tap(callable $callback): self
@@ -354,7 +337,6 @@ class Router implements Listener
     /**
      * Adds an interceptor that applies to all listeners in the Router.
      *
-     * @param Interceptor $interceptor
      * @return $this
      */
     public function use(Interceptor $interceptor): self
@@ -369,10 +351,6 @@ class Router implements Listener
         $this->getListener($context)->handle($context);
     }
 
-    /**
-     * @param Context $context
-     * @return Listener
-     */
     public function getListener(Context $context): Listener
     {
         $type = (string) $context->payload()->getType();
@@ -386,9 +364,8 @@ class Router implements Listener
     }
 
     /**
-     * @param PayloadType|string $type
-     * @param string $name
-     * @param Listener|callable|class-string|null $listener
+     * @param  PayloadType|string  $type
+     * @param  Listener|callable|class-string|null  $listener
      * @return $this
      */
     private function register($type, string $name, $listener): self

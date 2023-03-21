@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace SlackPhp\Framework\Contexts;
 
 use SlackPhp\BlockKit\Surfaces\Modal;
-use SlackPhp\Framework\{Coerce, Context};
+use SlackPhp\Framework\Coerce;
+use SlackPhp\Framework\Context;
 
 class View
 {
@@ -37,7 +38,7 @@ class View
     }
 
     /**
-     * @param Modal|array|string|callable(): Modal $modal
+     * @param  Modal|array|string|callable(): Modal  $modal
      */
     public function push($modal): void
     {
@@ -48,7 +49,7 @@ class View
     }
 
     /**
-     * @param Modal|array|string|callable(): Modal $modal
+     * @param  Modal|array|string|callable(): Modal  $modal
      */
     public function update($modal): void
     {

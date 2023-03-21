@@ -15,15 +15,21 @@ class AppCredentials
     private array $customSecrets;
 
     private ?string $appToken;
+
     private ?string $clientId;
+
     private ?string $clientSecret;
+
     private ?string $defaultBotToken;
+
     private ?string $signingKey;
+
     private ?string $stateSecret;
 
     public static function fromEnv(?string $prefix = null): self
     {
         $env = Env::vars($prefix);
+
         return new self(
             $env->getSigningKey(),
             $env->getBotToken(),
@@ -40,13 +46,7 @@ class AppCredentials
     }
 
     /**
-     * @param string|null $signingKey
-     * @param string|null $defaultBotToken
-     * @param string|null $clientId
-     * @param string|null $clientSecret
-     * @param string|null $stateSecret
-     * @param string|null $appToken
-     * @param array<string, mixed> $customSecrets
+     * @param  array<string, mixed>  $customSecrets
      */
     public function __construct(
         ?string $signingKey = null,
@@ -67,7 +67,6 @@ class AppCredentials
     }
 
     /**
-     * @param string $appToken
      * @return $this
      */
     public function withAppToken(string $appToken): self
@@ -78,7 +77,6 @@ class AppCredentials
     }
 
     /**
-     * @param string $clientId
      * @return $this
      */
     public function withClientId(string $clientId): self
@@ -89,7 +87,6 @@ class AppCredentials
     }
 
     /**
-     * @param string $clientSecret
      * @return $this
      */
     public function withClientSecret(string $clientSecret): self
@@ -100,7 +97,7 @@ class AppCredentials
     }
 
     /**
-     * @param array<string, mixed> $customSecrets
+     * @param  array<string, mixed>  $customSecrets
      * @return $this
      */
     public function withCustomSecrets(array $customSecrets): self
@@ -111,7 +108,6 @@ class AppCredentials
     }
 
     /**
-     * @param string $defaultBotToken
      * @return $this
      */
     public function withDefaultBotToken(string $defaultBotToken): self
@@ -122,7 +118,6 @@ class AppCredentials
     }
 
     /**
-     * @param string $signingKey
      * @return $this
      */
     public function withSigningKey(string $signingKey): self
@@ -133,7 +128,6 @@ class AppCredentials
     }
 
     /**
-     * @param string $stateSecret
      * @return $this
      */
     public function withStateSecret(string $stateSecret): self

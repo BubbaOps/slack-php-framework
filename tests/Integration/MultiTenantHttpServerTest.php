@@ -11,7 +11,9 @@ use SlackPhp\Framework\Tests\Fakes\FakeResponseEmitter;
 class MultiTenantHttpServerTest extends TestCase
 {
     private ServerRequestInterface $request;
+
     private FakeResponseEmitter $responseEmitter;
+
     private MultiTenantHttpServer $server;
 
     protected function setUp(): void
@@ -22,7 +24,7 @@ class MultiTenantHttpServerTest extends TestCase
         $this->responseEmitter = new FakeResponseEmitter();
         $this->server = MultiTenantHttpServer::new()
             ->registerApp('A1', Apps\AnyApp::class)
-            ->registerApp('A2', __DIR__ . '/Apps/any-app.php')
+            ->registerApp('A2', __DIR__.'/Apps/any-app.php')
             ->registerApp('A3', fn () => new Apps\AnyApp())
             ->withResponseEmitter($this->responseEmitter);
     }

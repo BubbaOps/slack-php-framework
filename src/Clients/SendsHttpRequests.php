@@ -4,18 +4,17 @@ declare(strict_types=1);
 
 namespace SlackPhp\Framework\Clients;
 
-use JsonException;
-use SlackPhp\Framework\Exception;
-use Throwable;
-
 use function compact;
 use function file_get_contents;
 use function http_build_query;
-use function json_encode;
 use function json_decode;
+use function json_encode;
+use JsonException;
+use SlackPhp\Framework\Exception;
 use function sprintf;
 use function stream_context_create;
 use function strlen;
+use Throwable;
 
 trait SendsHttpRequests
 {
@@ -64,10 +63,6 @@ trait SendsHttpRequests
     }
 
     /**
-     * @param string $method
-     * @param string $url
-     * @param string $header
-     * @param string $content
      * @return array<string, mixed>
      */
     private function sendHttpRequest(string $method, string $url, string $header, string $content): array

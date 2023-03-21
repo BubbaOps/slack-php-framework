@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace SlackPhp\Framework\Http;
 
-use Psr\Http\Message\{ResponseInterface, ServerRequestInterface};
-use SlackPhp\Framework\{Application, Context, Deferrer};
-use SlackPhp\Framework\Deferral\PreAckDeferrer;
 use Nyholm\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface as HandlerInterface;
+use SlackPhp\Framework\Application;
+use SlackPhp\Framework\Context;
+use SlackPhp\Framework\Deferral\PreAckDeferrer;
+use SlackPhp\Framework\Deferrer;
 
 class AppHandler implements HandlerInterface
 {
     private ?Deferrer $deferrer;
+
     private Application $app;
 
-    /**
-     * @param Application $app
-     * @param Deferrer|null $deferrer
-     */
     public function __construct(Application $app, ?Deferrer $deferrer = null)
     {
         $this->app = $app;
@@ -41,7 +41,7 @@ class AppHandler implements HandlerInterface
 
     public function createResponseFromContext(Context $context): ResponseInterface
     {
-        if (!$context->isAcknowledged()) {
+        if (! $context->isAcknowledged()) {
             throw new HttpException('No ack provided by the app');
         }
 

@@ -2,7 +2,9 @@
 
 namespace SlackPhp\Framework\Tests\Integration\Apps;
 
-use SlackPhp\Framework\{BaseApp, Context, Router};
+use SlackPhp\Framework\BaseApp;
+use SlackPhp\Framework\Context;
+use SlackPhp\Framework\Router;
 
 class AnyApp extends BaseApp
 {
@@ -11,4 +13,3 @@ class AnyApp extends BaseApp
         $router->any(fn (Context $ctx) => $ctx->ack('hello'));
     }
 }
-

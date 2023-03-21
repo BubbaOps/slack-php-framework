@@ -7,7 +7,9 @@ namespace SlackPhp\Framework\Commands;
 class Token
 {
     private bool $isOpt;
+
     private ?string $value;
+
     private ?string $key;
 
     public function __construct(string $token)
@@ -34,25 +36,16 @@ class Token
         $this->value = $value;
     }
 
-    /**
-     * @return string|null
-     */
     public function getValue(): ?string
     {
         return $this->value;
     }
 
-    /**
-     * @return string|null
-     */
     public function getKey(): ?string
     {
         return $this->key;
     }
 
-    /**
-     * @return bool
-     */
     public function isOpt(): bool
     {
         return $this->isOpt;

@@ -23,8 +23,6 @@ abstract class BaseApp extends Application
      * Prepares the application's router.
      *
      * Implementations MUST override this method to configure the Router.
-     *
-     * @param Router $router
      */
     abstract protected function prepareRouter(Router $router): void;
 
@@ -32,8 +30,6 @@ abstract class BaseApp extends Application
      * Prepares the application's config.
      *
      * Implementations SHOULD override this method to configure the Application.
-     *
-     * @param AppConfig $config
      */
     protected function prepareConfig(AppConfig $config): void
     {

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace SlackPhp\Framework\Auth;
 
-use SlackPhp\Framework\{Env, Exception};
+use SlackPhp\Framework\Env;
+use SlackPhp\Framework\Exception;
 
 class SingleTeamTokenStore implements TokenStore
 {

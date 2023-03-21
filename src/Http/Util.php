@@ -4,31 +4,30 @@ declare(strict_types=1);
 
 namespace SlackPhp\Framework\Http;
 
+use function array_filter;
+use const ARRAY_FILTER_USE_KEY;
+use JsonException;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface as HandlerInterface;
 use SlackPhp\Framework\Context;
 use SlackPhp\Framework\Contexts\Payload;
-use JsonException;
-use Psr\Http\Message\{ResponseInterface, ServerRequestInterface};
-use Psr\Http\Server\{MiddlewareInterface, RequestHandlerInterface as HandlerInterface};
-use Throwable;
-
-use function array_filter;
 use function strpos;
-
-use const ARRAY_FILTER_USE_KEY;
+use Throwable;
 
 abstract class Util
 {
     /**
      * Wraps handler with middleware, but keeps the handler interface.
      *
-     * @param HandlerInterface $handler
-     * @param MiddlewareInterface[] $middlewares
-     * @return HandlerInterface
+     * @param  MiddlewareInterface[]  $middlewares
      */
     public static function applyMiddleware(HandlerInterface $handler, array $middlewares): HandlerInterface
     {
         foreach ($middlewares as $middleware) {
-            $handler = new class($handler, $middleware) implements HandlerInterface {
+            $handler = new class($handler, $middleware) implements HandlerInterface
+            {
                 /** @var HandlerInterface */
                 private $handler;
 
@@ -52,8 +51,6 @@ abstract class Util
     }
 
     /**
-     * @param ServerRequestInterface $request
-     * @return Context
      * @throws HttpException if context cannot be created.
      */
     public static function createContextFromRequest(ServerRequestInterface $request): Context
@@ -75,8 +72,6 @@ abstract class Util
     }
 
     /**
-     * @param ServerRequestInterface $request
-     * @return Payload
      * @throws HttpException if payload cannot be parsed.
      */
     public static function parseRequestBody(ServerRequestInterface $request): Payload
@@ -84,6 +79,7 @@ abstract class Util
         try {
             $body = self::readRequestBody($request);
             $contentType = $request->getHeaderLine('Content-Type');
+
             return Payload::fromHttpRequest($body, $contentType);
         } catch (JsonException $ex) {
             throw new HttpException('Could not parse json in request body', 400, $ex);
@@ -92,10 +88,6 @@ abstract class Util
         }
     }
 
-    /**
-     * @param ServerRequestInterface $request
-     * @return string
-     */
     public static function readRequestBody(ServerRequestInterface $request): string
     {
         if ($request->getMethod() !== 'POST') {

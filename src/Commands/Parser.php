@@ -5,14 +5,15 @@ declare(strict_types=1);
 namespace SlackPhp\Framework\Commands;
 
 use function preg_match;
+use function str_replace;
 use function stripcslashes;
 use function strlen;
-use function str_replace;
 use function substr;
 
 class Parser
 {
     private const NORMAL_STRING = '([^\s]+?)(?:\s|(?<!\\\\)"|(?<!\\\\)\'|$)';
+
     private const QUOTED_STRING = '(?:"([^"\\\\]*(?:\\\\.[^"\\\\]*)*)"|\'([^\'\\\\]*(?:\\\\.[^\'\\\\]*)*)\')';
     //private const REGEX_OPT = '/^--?(?P<key>[^=]+)(?:=(?P<val>.+))?$/';
 
@@ -38,8 +39,6 @@ class Parser
     }
 
     /**
-     * @param string $input
-     * @return array
      * @throws ParsingException if command is invalid.
      */
     public function parse(string $input): array
@@ -67,7 +66,7 @@ class Parser
         }
 
         foreach ($this->optMap as $name => $opt) {
-            if (!isset($data[$name]) && $opt->getType() === OptDefinition::TYPE_BOOL) {
+            if (! isset($data[$name]) && $opt->getType() === OptDefinition::TYPE_BOOL) {
                 $data[$name] = false;
             }
         }
@@ -76,8 +75,6 @@ class Parser
     }
 
     /**
-     * @param string $input
-     * @return iterable
      * @throws ParsingException for invalid args/opts
      */
     private function getArgsAndOpts(string $input): iterable
@@ -90,7 +87,7 @@ class Parser
                 if ($token->isOpt()) {
                     throw new ParsingException('Expected value for `%s`, but received new opt: `%s`', [
                         $incomplete->getKey(),
-                        $token->getKey()
+                        $token->getKey(),
                     ]);
                 } else {
                     $incomplete->resolveValue($token->getValue());
@@ -123,26 +120,24 @@ class Parser
      *
      * Borrowed, with gratitude, from the Symfony Console component.
      *
-     * @param string $input
-     * @return iterable
      * @see https://github.com/symfony/console/blob/5.x/Input/StringInput.php
      */
     private function tokenize(string $input): iterable
     {
         // Convert smart quotes to regular ones.
-        $input = strtr($input, ['“' => '"', '”' => '"', "‘" => "'", "’" => "'"]);
+        $input = strtr($input, ['“' => '"', '”' => '"', '‘' => "'", '’' => "'"]);
 
         $length = strlen($input);
         $cursor = 0;
         while ($cursor < $length) {
             if (preg_match('/\s+/A', $input, $match, 0, $cursor)) {
                 // Skip whitespace.
-            } elseif (preg_match('/([^="\'\s]+?)(=?)(' . self::QUOTED_STRING . '+)/A', $input, $match, 0, $cursor)) {
+            } elseif (preg_match('/([^="\'\s]+?)(=?)('.self::QUOTED_STRING.'+)/A', $input, $match, 0, $cursor)) {
                 $value = str_replace(['"\'', '\'"', '\'\'', '""'], '', substr($match[3], 1, strlen($match[3]) - 2));
-                yield new Token($match[1] . $match[2] . stripcslashes($value));
-            } elseif (preg_match('/' . self::QUOTED_STRING . '/A', $input, $match, 0, $cursor)) {
+                yield new Token($match[1].$match[2].stripcslashes($value));
+            } elseif (preg_match('/'.self::QUOTED_STRING.'/A', $input, $match, 0, $cursor)) {
                 yield new Token(stripcslashes(substr($match[0], 1, strlen($match[0]) - 2)));
-            } elseif (preg_match('/' . self::NORMAL_STRING . '/A', $input, $match, 0, $cursor)) {
+            } elseif (preg_match('/'.self::NORMAL_STRING.'/A', $input, $match, 0, $cursor)) {
                 yield new Token(stripcslashes($match[1]));
             } else {
                 // Should never happen (according to Symfony Console devs).
@@ -153,11 +148,6 @@ class Parser
         }
     }
 
-    /**
-     * @param int $index
-     * @param Token $token
-     * @return array
-     */
     private function createArg(int $index, Token $token): array
     {
         // Make sure the definition supports this arg.
@@ -182,8 +172,6 @@ class Parser
     }
 
     /**
-     * @param Token $token
-     * @return array|null
      * @throws ParsingException
      */
     private function createOpt(Token $token): ?array
@@ -224,8 +212,6 @@ class Parser
     }
 
     /**
-     * @param string $value
-     * @param string $type
      * @return mixed
      */
     private function validateAndCoerceValueType(string $value, string $type)
@@ -233,12 +219,15 @@ class Parser
         switch ($type) {
             case ArgDefinition::TYPE_BOOL:
                 $value = filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+
                 return ($value === null) ? null : (bool) $value;
             case ArgDefinition::TYPE_INT:
                 $value = filter_var($value, FILTER_VALIDATE_INT);
+
                 return ($value === false) ? null : (int) $value;
             case ArgDefinition::TYPE_FLOAT:
                 $value = filter_var($value, FILTER_VALIDATE_FLOAT);
+
                 return ($value === false) ? null : (float) $value;
             default:
                 return (string) $value;

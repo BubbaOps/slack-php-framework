@@ -7,7 +7,8 @@ namespace SlackPhp\Framework;
 use JsonSerializable;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
-use SlackPhp\Framework\Auth\{AppCredentials, TokenStore};
+use SlackPhp\Framework\Auth\AppCredentials;
+use SlackPhp\Framework\Auth\TokenStore;
 use SlackPhp\Framework\Contexts\PayloadType;
 
 /**
@@ -21,8 +22,6 @@ class App extends Application
 
     /**
      * Creates a new, fluent-ready instance of App.
-     *
-     * @return self
      */
     public static function new(): self
     {
@@ -42,7 +41,6 @@ class App extends Application
      *
      * The default is "SLACK", but setting an app-specific one may be necessary for multi-tenant apps.
      *
-     * @param string $prefix
      * @return $this
      */
     public function withEnvPrefix(string $prefix): self
@@ -58,7 +56,6 @@ class App extends Application
      * Typically not required, as it will either be set for you or not required. You can set this explicitly to a) make
      * sure it gets included in log messages, and b) make sure the app validates that incoming requests match IDs.
      *
-     * @param string $id
      * @return $this
      */
     public function withId(string $id): self
@@ -71,7 +68,6 @@ class App extends Application
     /**
      * Sets a human-readable app alias to be used in log messages.
      *
-     * @param string $alias
      * @return $this
      */
     public function withAlias(string $alias): self
@@ -86,7 +82,6 @@ class App extends Application
      *
      * The PSR-3 logger gets wrapped by a custom logger implementation that adds additional context to messages.
      *
-     * @param LoggerInterface $logger
      * @return $this
      */
     public function withLogger(LoggerInterface $logger): self
@@ -103,7 +98,6 @@ class App extends Application
      * to be configured/resolved. The container is also accessible to the Context, if you need to use it as a "service
      * locator" as well (possible, but discouraged).
      *
-     * @param ContainerInterface $container
      * @return $this
      */
     public function withContainer(ContainerInterface $container): self
@@ -119,7 +113,6 @@ class App extends Application
      * A TokenStore is needed when an app is distributed to more than one team (aka workspace) or enterprise org. In
      * other words, when more than one API token can be used, the Token Store is what provides it.
      *
-     * @param TokenStore $tokenStore
      * @return $this
      */
     public function withTokenStore(TokenStore $tokenStore): self
@@ -134,7 +127,6 @@ class App extends Application
      *
      * You can also set this via the environment variable: SLACK_SIGNING_KEY.
      *
-     * @param string $signingKey
      * @return $this
      */
     public function withSigningKey(string $signingKey): self
@@ -149,7 +141,6 @@ class App extends Application
      *
      * You can also set this via the environment variable: SLACK_CLIENT_ID.
      *
-     * @param string $clientId
      * @return $this
      */
     public function withClientId(string $clientId): self
@@ -164,7 +155,6 @@ class App extends Application
      *
      * You can also set this via the environment variable: SLACK_CLIENT_SECRET.
      *
-     * @param string $clientSecret
      * @return $this
      */
     public function withClientSecret(string $clientSecret): self
@@ -181,7 +171,6 @@ class App extends Application
      * by the app when Slack redirects the user back to the app. You can also set this via the environment
      * variable: SLACK_STATE_SECRET.
      *
-     * @param string $stateSecret
      * @return $this
      */
     public function withStateSecret(string $stateSecret): self
@@ -194,7 +183,7 @@ class App extends Application
     /**
      * Sets the required scopes needed for the app. These are needed for the OAuth flow to set up app permissions.
      *
-     * @param string[] $scopes
+     * @param  string[]  $scopes
      * @return $this
      */
     public function withScopes(array $scopes): self
@@ -207,7 +196,6 @@ class App extends Application
     /**
      * Explicitly sets the app token to use for Socket Mode auth.
      *
-     * @param string $appToken
      * @return $this
      */
     public function withAppToken(string $appToken): self
@@ -222,7 +210,6 @@ class App extends Application
      *
      * You can also set this via the environment variable: SLACK_BOT_TOKEN.
      *
-     * @param string $botToken
      * @return $this
      */
     public function withBotToken(string $botToken): self
@@ -237,7 +224,6 @@ class App extends Application
      *
      * These credentials are an encapsulation of all the various app-specific keys and secrets needed for auth.
      *
-     * @param AppCredentials $appCredentials
      * @return $this
      */
     public function withAppCredentials(AppCredentials $appCredentials): self
@@ -250,7 +236,7 @@ class App extends Application
     /**
      * Sets an "ack" message used for async commands to inform the user to wait for the result (e.g., "processing...").
      *
-     * @param JsonSerializable|array|string $ack
+     * @param  JsonSerializable|array|string  $ack
      * @return $this
      */
     public function withCommandAck($ack): self
@@ -275,8 +261,7 @@ class App extends Application
     /**
      * Configures a listener for an incoming "command" request.
      *
-     * @param string $name
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function command(string $name, $listener): self
@@ -289,8 +274,7 @@ class App extends Application
     /**
      * Configures an async listener for an incoming "command" request.
      *
-     * @param string $name
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function commandAsync(string $name, $listener): self
@@ -303,8 +287,7 @@ class App extends Application
     /**
      * Configures listeners for an incoming "command" request, based on sub-commands in the text.
      *
-     * @param string $name
-     * @param array<string, Listener|callable|class-string> $subCommands
+     * @param  array<string, Listener|callable|class-string>  $subCommands
      * @return $this
      */
     public function commandGroup(string $name, array $subCommands): self
@@ -317,8 +300,7 @@ class App extends Application
     /**
      * Configures async listeners for an incoming "command" request, based on sub-commands in the text.
      *
-     * @param string $name
-     * @param array<string, Listener|callable|class-string> $subCommands
+     * @param  array<string, Listener|callable|class-string>  $subCommands
      * @return $this
      */
     public function commandGroupAsync(string $name, array $subCommands): self
@@ -331,8 +313,7 @@ class App extends Application
     /**
      * Configures a listener for an incoming "event" request.
      *
-     * @param string $name
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function event(string $name, $listener): self
@@ -345,8 +326,7 @@ class App extends Application
     /**
      * Configures an async listener for an incoming "event" request.
      *
-     * @param string $name
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function eventAsync(string $name, $listener): self
@@ -359,8 +339,7 @@ class App extends Application
     /**
      * Configures a listener for an incoming (global) "shortcut" request.
      *
-     * @param string $callbackId
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function globalShortcut(string $callbackId, $listener): self
@@ -373,8 +352,7 @@ class App extends Application
     /**
      * Configures an async listener for an incoming (global) "shortcut" request.
      *
-     * @param string $callbackId
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function globalShortcutAsync(string $callbackId, $listener): self
@@ -387,8 +365,7 @@ class App extends Application
     /**
      * Configures a listener for an incoming "message_action" (aka message shortcut) request.
      *
-     * @param string $callbackId
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function messageShortcut(string $callbackId, $listener): self
@@ -401,8 +378,7 @@ class App extends Application
     /**
      * Configures an async listener for an incoming "message_action" (aka message shortcut) request.
      *
-     * @param string $callbackId
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function messageShortcutAsync(string $callbackId, $listener): self
@@ -415,8 +391,7 @@ class App extends Application
     /**
      * Configures a listener for an incoming "block_actions" request.
      *
-     * @param string $actionId
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function blockAction(string $actionId, $listener): self
@@ -429,8 +404,7 @@ class App extends Application
     /**
      * Configures an async listener for an incoming "block_actions" request.
      *
-     * @param string $actionId
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function blockActionAsync(string $actionId, $listener): self
@@ -443,8 +417,7 @@ class App extends Application
     /**
      * Configures a listener for an incoming "block_suggestion" request.
      *
-     * @param string $actionId
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function blockSuggestion(string $actionId, $listener): self
@@ -457,8 +430,7 @@ class App extends Application
     /**
      * Configures a listener for an incoming "view_submission" request.
      *
-     * @param string $callbackId
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function viewSubmission(string $callbackId, $listener): self
@@ -471,8 +443,7 @@ class App extends Application
     /**
      * Configures an async listener for an incoming "view_submission" request.
      *
-     * @param string $callbackId
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function viewSubmissionAsync(string $callbackId, $listener): self
@@ -485,8 +456,7 @@ class App extends Application
     /**
      * Configures a listener for an incoming "view_closed" request.
      *
-     * @param string $callbackId
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function viewClosed(string $callbackId, $listener): self
@@ -499,8 +469,7 @@ class App extends Application
     /**
      * Configures an async listener for an incoming "view_closed" request.
      *
-     * @param string $callbackId
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function viewClosedAsync(string $callbackId, $listener): self
@@ -513,8 +482,7 @@ class App extends Application
     /**
      * Configures a listener for an incoming "workflow_step_edit" request.
      *
-     * @param string $callbackId
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function workflowStepEdit(string $callbackId, $listener): self
@@ -527,8 +495,7 @@ class App extends Application
     /**
      * Configures an async listener for an incoming "workflow_step_edit" request.
      *
-     * @param string $callbackId
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function workflowStepEditAsync(string $callbackId, $listener): self
@@ -541,8 +508,8 @@ class App extends Application
     /**
      * Configures a listener for an incoming request of the specified type.
      *
-     * @param PayloadType|string $type
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  PayloadType|string  $type
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function on($type, $listener): self
@@ -555,8 +522,8 @@ class App extends Application
     /**
      * Configures an async listener for an incoming request of the specified type.
      *
-     * @param PayloadType|string $type
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  PayloadType|string  $type
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function onAsync($type, $listener): self
@@ -569,7 +536,7 @@ class App extends Application
     /**
      * Configures a catch-all listener for an incoming request.
      *
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function any($listener): self
@@ -582,7 +549,7 @@ class App extends Application
     /**
      * Configures an async catch-all listener for an incoming request.
      *
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function anyAsync($listener): self
@@ -595,7 +562,7 @@ class App extends Application
     /**
      * Adds a tap interceptor, which executes a callback with the Context.
      *
-     * @param callable(Context): void $callback
+     * @param  callable(Context): void  $callback
      * @return $this
      */
     public function tap(callable $callback): self
@@ -608,7 +575,6 @@ class App extends Application
     /**
      * Adds an interceptor that applies to all listeners in the Router.
      *
-     * @param Interceptor $interceptor
      * @return $this
      */
     public function use(Interceptor $interceptor): self

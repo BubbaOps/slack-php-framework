@@ -29,7 +29,7 @@ class ShortcutTest extends IntegTestCase
 
             return [
                 'ok' => true,
-                'view' => ['id' => 'xyz123']
+                'view' => ['id' => 'xyz123'],
             ];
         };
 
@@ -50,7 +50,7 @@ class ShortcutTest extends IntegTestCase
             'type' => 'message_action',
             'callback_id' => 'foobar',
             'response_url' => $responseUrl,
-            'message' => ['text' => 'foo']
+            'message' => ['text' => 'foo'],
         ]);
 
         $listener = function (Context $ctx) {

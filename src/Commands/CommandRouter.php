@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace SlackPhp\Framework\Commands;
 
-use Closure;
-use SlackPhp\Framework\{Coerce, Context, Listener};
-
 use function array_keys;
 use function array_map;
 use function array_pop;
 use function array_slice;
+use Closure;
 use function count;
 use function explode;
 use function implode;
 use function max;
 use function natsort;
+use SlackPhp\Framework\Coerce;
+use SlackPhp\Framework\Context;
+use SlackPhp\Framework\Listener;
 
 /**
  * Routes commands to sub-routers (aka. sub-commands) based on params parsed from command text.
@@ -23,8 +24,11 @@ use function natsort;
 class CommandRouter implements Listener
 {
     private Listener $default;
+
     private string $description;
+
     private int $maxLevels;
+
     /** @var array<string, Listener> */
     private array $routes;
 
@@ -45,8 +49,7 @@ class CommandRouter implements Listener
     }
 
     /**
-     * @param string $subCommand
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function add(string $subCommand, $listener): self
@@ -63,7 +66,7 @@ class CommandRouter implements Listener
     }
 
     /**
-     * @param Listener|callable(Context): void|class-string $listener
+     * @param  Listener|callable(Context): void|class-string  $listener
      * @return $this
      */
     public function withDefault($listener): self
@@ -73,10 +76,6 @@ class CommandRouter implements Listener
         return $this;
     }
 
-    /**
-     * @param string $description
-     * @return self
-     */
     public function withDescription(string $description): self
     {
         $this->description = $description;
@@ -91,12 +90,13 @@ class CommandRouter implements Listener
         $nameArgs = array_slice(explode(' ', $text), 0, $this->maxLevels);
 
         // Match on the most specific (i.e., deepest) sub-command first, and then work backwards to the most generic.
-        while (!empty($nameArgs)) {
+        while (! empty($nameArgs)) {
             $subCommand = implode(' ', $nameArgs);
             if (isset($this->routes[$subCommand])) {
                 $context->logger()->debug("CommandRouter routing to sub-command: \"{$command} {$subCommand}\"");
                 $context->set('remaining_text', substr($text, strlen($subCommand) + 1));
                 $this->routes[$subCommand]->handle($context);
+
                 return;
             }
             array_pop($nameArgs);
@@ -124,7 +124,7 @@ class CommandRouter implements Listener
         natsort($routes);
         $msg->newSection()->mrkdwnText($fmt->lines([
             '*Available sub-commands*:',
-            $fmt->bulletedList(array_map(fn (string $subCommand) => $fmt->code("{$cmd} {$subCommand}"), $routes))
+            $fmt->bulletedList(array_map(fn (string $subCommand) => $fmt->code("{$cmd} {$subCommand}"), $routes)),
         ]));
 
         if ($context->isAcknowledged()) {

@@ -4,18 +4,13 @@ declare(strict_types=1);
 
 namespace SlackPhp\Framework\Auth;
 
-use SlackPhp\Framework\{Env, Exception};
+use SlackPhp\Framework\Env;
+use SlackPhp\Framework\Exception;
 
 class SingleAppCredentialsStore implements AppCredentialsStore
 {
     private AppCredentials $appCredentials;
 
-    /**
-     * @param string|null $signingKey
-     * @param string|null $defaultBotToken
-     * @param string|null $clientId
-     * @param string|null $clientSecret
-     */
     public function __construct(
         ?string $signingKey = null,
         ?string $defaultBotToken = null,
@@ -37,8 +32,6 @@ class SingleAppCredentialsStore implements AppCredentialsStore
     }
 
     /**
-     * @param string $appId
-     * @return AppCredentials
      * @throws Exception if bot app credentials cannot be retrieved
      */
     public function getAppCredentials(string $appId): AppCredentials

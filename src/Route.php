@@ -10,9 +10,8 @@ namespace SlackPhp\Framework;
 class Route
 {
     /**
-     * @param Listener|callable(Context): void|class-string $asyncListener
-     * @param Listener|callable(Context): void|class-string|null $syncListener
-     * @return Listener
+     * @param  Listener|callable(Context): void|class-string  $asyncListener
+     * @param  Listener|callable(Context): void|class-string|null  $syncListener
      */
     public static function async($asyncListener, $syncListener = null): Listener
     {
@@ -24,9 +23,8 @@ class Route
     }
 
     /**
-     * @param array<string, string>|callable $filter
-     * @param Listener|callable(Context): void|class-string $listener
-     * @return Listener
+     * @param  array<string, string>|callable  $filter
+     * @param  Listener|callable(Context): void|class-string  $listener
      */
     public static function filter($filter, $listener): Listener
     {
@@ -42,9 +40,8 @@ class Route
     }
 
     /**
-     * @param Interceptor|callable(): Interceptor|array $interceptor
-     * @param Listener|callable(Context): void|class-string $listener
-     * @return Listener
+     * @param  Interceptor|callable(): Interceptor|array  $interceptor
+     * @param  Listener|callable(Context): void|class-string  $listener
      */
     public static function intercept($interceptor, $listener): Listener
     {
@@ -52,9 +49,7 @@ class Route
     }
 
     /**
-     * @param string $field
-     * @param array<string, Listener|callable|class-string> $listeners
-     * @return Listener
+     * @param  array<string, Listener|callable|class-string>  $listeners
      */
     public static function switch(string $field, array $listeners): Listener
     {
@@ -62,9 +57,8 @@ class Route
     }
 
     /**
-     * @param callable(Context): void $callback
-     * @param Listener|callable(Context): void|class-string $listener
-     * @return Listener
+     * @param  callable(Context): void  $callback
+     * @param  Listener|callable(Context): void|class-string  $listener
      */
     public static function tap(callable $callback, $listener): Listener
     {

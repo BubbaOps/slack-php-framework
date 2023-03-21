@@ -19,9 +19,6 @@ class Input
         $this->setData($parser->parse($commandText));
     }
 
-    /**
-     * @return Definition
-     */
     public function getDefinition(): Definition
     {
         return $this->definition;

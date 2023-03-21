@@ -12,17 +12,11 @@ use SlackPhp\Framework\Exception;
 interface TokenStore
 {
     /**
-     * @param string|null $teamId
-     * @param string|null $enterpriseId
      * @return string
+     *
      * @throws Exception if bot token is not available
      */
     public function get(?string $teamId, ?string $enterpriseId): ?string;
 
-    /**
-     * @param string|null $teamId
-     * @param string|null $enterpriseId
-     * @param string $token
-     */
     public function set(?string $teamId, ?string $enterpriseId, string $token): void;
 }

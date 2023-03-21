@@ -13,8 +13,6 @@ interface Deferrer
      * Defers additional processing on an "ack"ed context, usually via an async processing or queuing mechanism.
      *
      * This additional processing is typically asynchronous and happens "out of band" from the original Slack request.
-     *
-     * @param Context $context
      */
     public function defer(Context $context): void;
 }

@@ -9,6 +9,7 @@ use SlackPhp\Framework\Http\ResponseEmitter;
 class FakeResponseEmitter implements ResponseEmitter
 {
     private ?Closure $fn;
+
     private ?ResponseInterface $lastResponse;
 
     public function __construct(?callable $fn = null)

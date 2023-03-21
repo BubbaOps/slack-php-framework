@@ -4,20 +4,21 @@ declare(strict_types=1);
 
 namespace SlackPhp\Framework;
 
-use Psr\Log\{AbstractLogger, InvalidArgumentException, LogLevel};
-
 use function json_encode;
+use Psr\Log\AbstractLogger;
+use Psr\Log\InvalidArgumentException;
+use Psr\Log\LogLevel;
 
 class StderrLogger extends AbstractLogger
 {
     private const LOG_LEVEL_MAP = [
-        LogLevel::DEBUG     => 0,
-        LogLevel::INFO      => 1,
-        LogLevel::NOTICE    => 2,
-        LogLevel::WARNING   => 3,
-        LogLevel::ERROR     => 4,
-        LogLevel::CRITICAL  => 5,
-        LogLevel::ALERT     => 6,
+        LogLevel::DEBUG => 0,
+        LogLevel::INFO => 1,
+        LogLevel::NOTICE => 2,
+        LogLevel::WARNING => 3,
+        LogLevel::ERROR => 4,
+        LogLevel::CRITICAL => 5,
+        LogLevel::ALERT => 6,
         LogLevel::EMERGENCY => 7,
     ];
 
@@ -28,7 +29,7 @@ class StderrLogger extends AbstractLogger
 
     public function __construct(string $minLevel = LogLevel::WARNING, $stream = 'php://stderr')
     {
-        if (!isset(self::LOG_LEVEL_MAP[$minLevel])) {
+        if (! isset(self::LOG_LEVEL_MAP[$minLevel])) {
             throw new InvalidArgumentException("Invalid log level: {$minLevel}");
         }
 
@@ -38,8 +39,8 @@ class StderrLogger extends AbstractLogger
             $this->stream = $stream;
         } elseif (is_string($stream)) {
             $this->stream = fopen($stream, 'a');
-            if (!$this->stream) {
-                throw new Exception('Unable to open stream: ' . $stream);
+            if (! $this->stream) {
+                throw new Exception('Unable to open stream: '.$stream);
             }
         } else {
             throw new InvalidArgumentException('A stream must either be a resource or a string');
@@ -48,7 +49,7 @@ class StderrLogger extends AbstractLogger
 
     public function log($level, $message, array $context = [])
     {
-        if (!isset(self::LOG_LEVEL_MAP[$level])) {
+        if (! isset(self::LOG_LEVEL_MAP[$level])) {
             throw new InvalidArgumentException("Invalid log level: {$level}");
         }
 
@@ -67,6 +68,6 @@ class StderrLogger extends AbstractLogger
             $context['exception'] = explode("\n", (string) $exception);
         }
 
-        fwrite($this->stream, json_encode(compact('level', 'message', 'context')) . "\n");
+        fwrite($this->stream, json_encode(compact('level', 'message', 'context'))."\n");
     }
 }

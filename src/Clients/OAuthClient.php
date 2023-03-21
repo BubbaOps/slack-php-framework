@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace SlackPhp\Framework\Clients;
 
-use SlackPhp\Framework\Exception;
-
 use function array_filter;
+use SlackPhp\Framework\Exception;
 
 class OAuthClient
 {
@@ -18,11 +17,8 @@ class OAuthClient
     }
 
     /**
-     * @param string $clientId
-     * @param string $clientSecret
-     * @param string $temporaryAccessCode
-     * @param string|null $redirectUri
      * @return array Includes access_token, team.id, and enterprise.id fields
+     *
      * @throws Exception
      */
     public function createAccessToken(
@@ -40,9 +36,6 @@ class OAuthClient
     }
 
     /**
-     * @param string $accessToken
-     * @param bool|null $test
-     * @return array
      * @throws Exception
      */
     public function revokeAccessToken(string $accessToken, ?bool $test = null): array

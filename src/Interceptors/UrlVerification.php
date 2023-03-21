@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace SlackPhp\Framework\Interceptors;
 
-use SlackPhp\Framework\{Context, Interceptor, Listener};
+use SlackPhp\Framework\Context;
 use SlackPhp\Framework\Contexts\PayloadType;
+use SlackPhp\Framework\Interceptor;
+use SlackPhp\Framework\Listener;
 
 class UrlVerification implements Interceptor
 {

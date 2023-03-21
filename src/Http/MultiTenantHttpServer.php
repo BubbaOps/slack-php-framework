@@ -6,7 +6,8 @@ namespace SlackPhp\Framework\Http;
 
 use Closure;
 use Psr\Http\Message\ServerRequestInterface;
-use SlackPhp\Framework\{Application, Coerce};
+use SlackPhp\Framework\Application;
+use SlackPhp\Framework\Coerce;
 
 class MultiTenantHttpServer extends HttpServer
 {
@@ -14,13 +15,13 @@ class MultiTenantHttpServer extends HttpServer
 
     /** @var array<string, mixed> */
     private array $apps = [];
+
     private ?Closure $appIdDetector;
 
     /**
      * Register an app by app ID to be routed to.
      *
-     * @param string $appId
-     * @param string|callable(): Application $appFactory App class name, include file, or factory callback.
+     * @param  string|callable(): Application  $appFactory App class name, include file, or factory callback.
      * @return $this
      */
     public function registerApp(string $appId, $appFactory): self
@@ -69,8 +70,8 @@ class MultiTenantHttpServer extends HttpServer
     }
 
     /**
-     * @param string $appId ID for the application
-     * @return Application
+     * @param  string  $appId ID for the application
+     *
      * @noinspection PhpIncludeInspection
      */
     private function instantiateApp(string $appId): Application
